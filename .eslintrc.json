@@ -17,7 +17,9 @@
   },
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "semi": [2, "always"]
+    "semi": [2, "always"],
+    "no-console": "off",
+    "react/forbid-prop-types": 0
   },
   "plugins": ["react"]
 }
