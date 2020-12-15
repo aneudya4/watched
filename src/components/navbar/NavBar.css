@@ -1,15 +1,27 @@
 header {
   background: #0e171d;
   color: white;
+  position: fixed;
+  width: 100%;
+  transition: all ease-in 0.5s;
 }
 
 nav {
-  max-width: 1200px;
   display: flex;
   margin: 0 auto;
   align-items: center;
   padding: 20px;
-  background: #0e171d;
+  color: inherit;
+  width: 100%;
+  max-width: 1200px;
+}
+.light {
+  background: white;
+  color: black !important;
+  z-index: 1;
+}
+nav h1.logo {
+  color: inherit;
 }
 nav ul {
   margin-left: auto;
@@ -20,4 +32,7 @@ nav ul li {
   margin: 0 10px;
   font-size: 17px;
   font-weight: bold;
+}
+nav ul li a {
+  color: inherit;
 }
