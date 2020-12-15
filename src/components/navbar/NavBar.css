@@ -1,0 +1,23 @@
+header {
+  background: #0e171d;
+  color: white;
+}
+
+nav {
+  max-width: 1200px;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  padding: 20px;
+  background: #0e171d;
+}
+nav ul {
+  margin-left: auto;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 10px;
+  font-size: 17px;
+  font-weight: bold;
+}

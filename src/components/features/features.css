@@ -1,0 +1,49 @@
+.features {
+  background: #0e171d;
+  color: White;
+  text-transform: uppercase;
+}
+
+.all-features {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.all-features {
+  text-align: center;
+}
+.all-features h3 {
+  font-size: 30px;
+}
+
+.all-features h3 span {
+  color: rgb(148, 34, 14);
+}
+.features-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.feature {
+  display: flex;
+  text-align: left;
+  margin: 0 0 0 20px;
+}
+
+.feature .icon {
+  font-size: 35px;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+.features-details h4 {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.features-details p {
+  font-size: 13px;
+  margin-top: 8px;
+}

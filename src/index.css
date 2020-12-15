@@ -1,5 +1,23 @@
 * {
-  margin:0;
-  padding:0;
-  box-sizing:border-box
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+.logo {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 25px;
+  letter-spacing: 1.3px;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
+}
+a,
+a:visited,
+a:active {
+  color: white;
+  text-decoration: none;
 }

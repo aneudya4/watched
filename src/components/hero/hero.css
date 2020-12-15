@@ -1,0 +1,49 @@
+.hero {
+  /* position: absolute; */
+  /* top: 50%;
+  left: 50%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
+  color: white;
+  background: #0e171d;
+  height: 100vh;
+}
+.app-info {
+  width: 600px;
+  transform: translate(0%, -50%);
+}
+
+.app-info p {
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.app-info h2 span {
+  background: rgb(148, 34, 14);
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.app-info h2 {
+  font-size: 50px;
+}
+
+.app-info a {
+  font-size: 13px;
+  display: inline-block;
+  padding: 5px 20px;
+  margin: 10px;
+  border: 2px solid white;
+  border-radius: 2px;
+}
+
+.app-info a:hover {
+  background: white;
+  color: black;
+  transition: all ease-in 0.2s;
+}
