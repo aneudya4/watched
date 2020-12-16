@@ -1,0 +1,28 @@
+.media-card {
+  background-color: transparent;
+  width: 250px;
+  padding: 20px;
+}
+.media-card .media-img {
+  width: 100%;
+}
+.media-card img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.media-info p.title {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.media-info .genres span {
+  font-weight: lighter;
+  font-size: 13px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.media-info .genres span:not(:first-of-type) {
+  margin-left: 5px;
+}

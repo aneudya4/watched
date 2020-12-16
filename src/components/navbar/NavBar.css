@@ -11,17 +11,27 @@ nav {
   margin: 0 auto;
   align-items: center;
   padding: 20px;
-  color: inherit;
   width: 100%;
   max-width: 1200px;
 }
 .light {
   background: white;
-  color: black !important;
+  color: black;
   z-index: 1;
+}
+.light li {
+  font-size: 15px;
+}
+
+.light li > a {
+  color: inherit;
 }
 nav h1.logo {
   color: inherit;
+}
+
+.light h1.logo {
+  font-size: 22px !important;
 }
 nav ul {
   margin-left: auto;
@@ -32,7 +42,4 @@ nav ul li {
   margin: 0 10px;
   font-size: 17px;
   font-weight: bold;
-}
-nav ul li a {
-  color: inherit;
 }
