@@ -1,28 +1,51 @@
 .media-card {
   background-color: transparent;
+  position: relative;
   width: 250px;
+  height: 350px;
   padding: 20px;
+  margin: 20px 0;
 }
 .media-card .media-img {
   width: 100%;
+  height: 100%;
 }
 .media-card img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
+.media-info {
+  margin-top: 7px;
+}
 .media-info p.title {
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 15px;
 }
 
-.media-info .genres span {
+.media-info .genres p {
   font-weight: lighter;
-  font-size: 13px;
+  font-size: 12px;
   display: inline-block;
   margin-top: 5px;
+  word-spacing: 5px;
 }
 
 .media-info .genres span:not(:first-of-type) {
   margin-left: 5px;
+}
+
+.vote-avg {
+  background: rgba(247, 179, 78, 0.959);
+  display: inline-block;
+  text-align: center;
+  padding: 5px 13px 7px 13px;
+  font-weight: bolder;
+  color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

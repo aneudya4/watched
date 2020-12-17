@@ -1,25 +1,30 @@
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable react/prop-types */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
 import React, { useState } from 'react';
-import dummyData from '../../dummyData.json';
+// import { Link } from 'react-router-dom';
 import movieGenre from '../../movieGenre.json';
-
+import dummyData from '../../dummyData.json';
 import MediaCard from '../mediacard/MediaCard';
+import './medialist.css';
 
 const MediaList = () => {
   const [media] = useState(dummyData.results);
   const [genres] = useState(movieGenre);
+  const getMEdiaGenres = (genreIds) =>
+    genreIds.map((c) => genres.genres.find((p) => p.id === c));
 
-  const mediaGenres = media[0].genre_ids.map((c) =>
-    genres.genres.find((p) => p.id === c),
-  );
-
-  console.log(mediaGenres, 'jere');
   return (
-    <>
-      <MediaCard media={media[0]} genres={mediaGenres} />
-      <span>MediaList</span>
-    </>
+    <section className="media-list">
+      {media.map((mediaData) => (
+        <MediaCard
+          key={mediaData.id}
+          media={mediaData}
+          genres={getMEdiaGenres(mediaData.genre_ids)}
+        />
+      ))}
+    </section>
   );
 };
 
