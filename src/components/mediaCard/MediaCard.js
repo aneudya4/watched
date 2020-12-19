@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -7,7 +8,7 @@ import './mediacard.css';
 
 const MediaCard = ({ media, genres }) => {
   const beautifyGenreList = (genreList) => {
-    const genresArr = genreList ? genreList.map((genre) => genre.name) : [];
+    const genresArr = genreList[0] ? genreList.map((genre) => genre.name) : [];
     return genresArr.join(', ');
   };
 

@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
-  height: 50vh;
 }
 
 .media-details .media-img {
@@ -38,14 +37,23 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+.release-info p {
+  margin: 10px 0;
+}
 
 .media-summary h3 {
   font-size: 35px;
   font-weight: bold;
 }
 
+.media-summary h4 {
+  margin: 25px 0 10px 0;
+  font-size: 20px;
+
+  color: #40525e;
+}
+
 .media-summary p {
-  margin-top: 25px;
   max-width: 700px;
 }
 .media-summary span {

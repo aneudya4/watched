@@ -10,6 +10,9 @@ const DashboardNav = () => (
       <h1 className="logo">WATCHED</h1>
       <ul>
         <li>
+          <NavLink to="/auth/dashboard/search">Search</NavLink>
+        </li>
+        <li>
           <NavLink to="/auth/dashboard">Dashboard</NavLink>
         </li>
         <li>
@@ -17,9 +20,6 @@ const DashboardNav = () => (
         </li>
         <li>
           <NavLink to="/auth/dashboard/favorites">Favorites</NavLink>
-        </li>
-        <li>
-          <NavLink to="/auth/dashboard">Dashboard</NavLink>
         </li>
         <li>
           <NavLink to="/">Log Out</NavLink>
