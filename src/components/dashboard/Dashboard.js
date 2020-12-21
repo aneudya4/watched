@@ -6,11 +6,12 @@ import React, { useEffect, useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import DashboardNav from '../dashboardNav/DashboardNav';
 import MediaList from '../mediaList/MediaList';
+import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
 import { DispatchContext } from '../../appContext';
 
 const DashBoard = ({ match }) => {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -52,11 +53,14 @@ const DashBoard = ({ match }) => {
       <DashboardNav />
       <Switch>
         <Route exact path={match.path} component={MediaList} />
+        <Route exact path={`${match.path}/watchlist`} component={WatchList} />
+
         <Route
           exact
           path={`${match.path}/details/:mediaId`}
           component={MediaDetails}
         />
+
         <Redirect to="/" />
       </Switch>
     </div>

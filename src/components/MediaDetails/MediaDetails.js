@@ -1,14 +1,22 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useReducer } from 'react';
 import Spinner from '../spinner/Spinner';
+import watchListReducer from '../reducers/watchListReducer';
+import { WatchListContext, DispatchContext } from '../../appContext';
 // eslint-disable-next-line import/no-unresolved
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
   const [media, setMedia] = useState(null);
   const [cast, setCast] = useState(null);
+
+  const { watchListDispatch } = useContext(DispatchContext);
+
+  const watchList = useContext(WatchListContext);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -25,6 +33,17 @@ const MediaDetails = ({ match }) => {
     fetchMovieDetails();
   }, []);
 
+  const handleAdd = () => {
+    watchListDispatch({ type: 'ADD_MEDIA_TO_WATCHLIST', payload: media });
+  };
+
+  const handleremove = () => {
+    const filteredList = watchList.filter((item) => item.id !== media.id);
+    watchListDispatch({
+      type: 'REMOVE_MEDIA_FROM_WATCHLIST',
+      payload: filteredList,
+    });
+  };
   useEffect(() => {
     if (media) {
       const fetchMovieDetails = async () => {
@@ -34,7 +53,6 @@ const MediaDetails = ({ match }) => {
           );
           const resultsJson = await results.json();
           setCast(resultsJson.cast.filter((list, i) => i <= 10));
-          // setMedia(resultsJson);
         } catch (error) {
           console.log(error);
         }
@@ -49,6 +67,26 @@ const MediaDetails = ({ match }) => {
     const genresArr = castList ? castList.map((genre) => genre.name) : [];
     return genresArr.join(', ');
   };
+
+  const renderButtons = () => {
+    const isAdded = watchList.includes(media);
+    if (!isAdded) {
+      return (
+        <button onClick={handleAdd} type="button" className="btn btn-add-wish">
+          Add to Watch list
+        </button>
+      );
+    }
+    return (
+      <button
+        onClick={handleremove}
+        type="button"
+        className="btn btn-remove-wish">
+        Remove from Watch list
+      </button>
+    );
+  };
+
   return (
     <section className="media-data">
       <div className="media-details">
@@ -80,20 +118,7 @@ const MediaDetails = ({ match }) => {
             <h4>Cast</h4>
             <p>{beautifyCastList(cast)}.</p>
           </div>
-          <div className="media-action-btns">
-            <button type="button" className="btn btn-add-wish">
-              Wish list
-            </button>
-            <button type="button" className="btn btn-add-favorite">
-              Favorite list
-            </button>
-            <button type="button" className="btn btn-remove-wish">
-              Remove from wish list
-            </button>
-            <button type="button" className="btn btn-remove-favorite">
-              Remove from favorite list
-            </button>
-          </div>
+          <div className="media-action-btns">{renderButtons()}</div>
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ import './medialist.css';
 
 const MediaList = React.memo(() => {
   const media = useContext(MediaContext);
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(DispatchContext);
 
   const [mediaCategory, setMediaCategory] = useState('popular');
 
