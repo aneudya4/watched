@@ -8,6 +8,7 @@ import DashboardNav from '../dashboardNav/DashboardNav';
 import MediaList from '../mediaList/MediaList';
 import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
+import SearchMedia from '../searchmedia/SearchMedia';
 import { DispatchContext } from '../../appContext';
 
 const DashBoard = ({ match }) => {
@@ -52,12 +53,13 @@ const DashBoard = ({ match }) => {
     <div className="dashboard">
       <DashboardNav />
       <Switch>
-        <Route exact path={match.path} component={MediaList} />
-        <Route exact path={`${match.path}/watchlist`} component={WatchList} />
+        <Route exact path={`${match.path}media`} component={MediaList} />
+        <Route exact path={`${match.path}watchlist`} component={WatchList} />
+        <Route exact path={`${match.path}search`} component={SearchMedia} />
 
         <Route
           exact
-          path={`${match.path}/details/:mediaId`}
+          path={`${match.path}details/:mediaId`}
           component={MediaDetails}
         />
 

@@ -1,39 +1,38 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { WatchListContext } from '../../appContext';
+import WatchListCard from '../wartchlistcard/WatchListCard';
 // eslint-disable-next-line import/no-unresolved
 import './watchlist.css';
 
 const WatchList = () => {
   const watchList = useContext(WatchListContext);
+  const [input, setInput] = useState('');
 
-  console.log(watchList, 'este');
+  const filterList = watchList.filter((list) =>
+    list.title.toLowerCase().includes(input.toLowerCase()),
+  );
+
   return (
     <section className="watch-list">
       <h2>WatchList</h2>
-      <input type="text" placeholder="Search" />
+
+      <label>
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <i className="fas fa-search" />
+      </label>
 
       <div className="watch-list-collection">
-        <div className="watch-list-card">
-          <div className="watch-list-img">
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${watchList[0].poster_path}`}
-              alt="mmg"
-            />
-          </div>
-          <div className="watch-list-details">
-            <span>
-              <i className="fas fa-star" />
-            </span>
-            <p>{watchList[0].title}</p>
-            <p>{watchList[0].release_date.slice(0, 4)}</p>
-            <p>{watchList[0].runtime} mins</p>
-            <p>{watchList[0].status}</p>
-            <a href={watchList[0].homepage} rel="noreferrer" target="_blank">
-              Website
-            </a>
-          </div>
-        </div>
+        {filterList.map((media) => (
+          <WatchListCard key={media.id} media={media} />
+        ))}
       </div>
     </section>
   );

@@ -1,53 +1,43 @@
 .watch-list {
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.watch-list label {
+  position: relative;
+}
+
+.watch-list label input {
+  width: 250px;
+  padding: 10px;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.watch-list label i {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  font-size: 20px;
   color: #0e171d;
 }
 
-.watch-list-card {
+.watch-list h2 {
+  font-size: 40px;
+  margin: 10px 0;
+}
+.watch-list-collection {
   display: flex;
-  position: relative;
-  align-items: center;
-  width: 450px;
-  height: 300px;
-  background: #1b2933;
-  background: white;
-}
-.watch-list-img {
-  width: 50%;
-  height: 100%;
-}
-.watch-list img {
-  width: 100%;
-  object-fit: cover;
-  height: 100%;
-}
-.watch-list-details {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 0 20px;
+  text-align: left;
 }
-.watch-list-details > span {
-  color: gold;
-  margin-bottom: auto;
-  position: absolute;
-  top: 0;
-  right: 5%;
-  font-size: 20px;
-}
-.watch-list-details > * {
-  margin: 10px 0 0 0;
-  font-size: 20px;
-  text-transform: capitalize;
-}
-
-.watch-list-details a {
-  display: inline-block;
-  background: #0e171d;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 3px;
-  font-size: 15px;
-  text-align: center;
-}
-
-.watch-list-details a:hover {
-  background: #0e171db9;
-  transition: all ease 0.5s;
+.watch-list-collection:after {
+  content: '';
+  display: block;
+  width: 450px;
 }

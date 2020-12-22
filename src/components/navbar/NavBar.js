@@ -26,7 +26,7 @@ const NavBar = () => {
             <NavLink to="/register">Register</NavLink>
           </li>
           <li>
-            <NavLink to="/auth/dashboard">Dashboard</NavLink>
+            <NavLink to="/auth/dashboard/media">Dashboard</NavLink>
           </li>
           <li>
             <NavLink to="/">Log Out</NavLink>

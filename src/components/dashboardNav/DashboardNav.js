@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-return-assign */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -10,17 +11,21 @@ const DashboardNav = () => (
       <h1 className="logo">WATCHED</h1>
       <ul>
         <li>
-          <NavLink to="/auth/dashboard/search">Search</NavLink>
+          <NavLink activeClassName="selected" to="/auth/dashboard/search">
+            Search
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/auth/dashboard">Dashboard</NavLink>
+          <NavLink activeClassName="selected" to="/auth/dashboard/media">
+            Dashboard
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/auth/dashboard/watchlist">Watch list</NavLink>
+          <NavLink activeClassName="selected" to="/auth/dashboard/watchlist">
+            Watch list
+          </NavLink>
         </li>
-        <li>
-          <NavLink to="/auth/dashboard/favorites">Favorites</NavLink>
-        </li>
+
         <li>
           <NavLink to="/">Log Out</NavLink>
         </li>

@@ -11,7 +11,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <Route path="/auth/dashboard" component={Dashboard} />
+          <Route path="/auth/dashboard/" component={Dashboard} />
           <Route exact path="/" component={HomePageRoutes} />
         </Switch>
       </Suspense>

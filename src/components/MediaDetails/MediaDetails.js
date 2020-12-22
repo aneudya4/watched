@@ -1,11 +1,11 @@
+/* eslint-disable camelcase */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext, useReducer } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Spinner from '../spinner/Spinner';
-import watchListReducer from '../reducers/watchListReducer';
 import { WatchListContext, DispatchContext } from '../../appContext';
 // eslint-disable-next-line import/no-unresolved
 import './mediadetails.css';
@@ -34,14 +34,31 @@ const MediaDetails = ({ match }) => {
   }, []);
 
   const handleAdd = () => {
-    watchListDispatch({ type: 'ADD_MEDIA_TO_WATCHLIST', payload: media });
+    const {
+      id,
+      title,
+      release_date,
+      runtime,
+      status,
+      poster_path,
+      genres,
+    } = media;
+    const addedMedia = {
+      id,
+      title,
+      release_date,
+      runtime,
+      status,
+      poster_path,
+      genres,
+    };
+    watchListDispatch({ type: 'ADD_MEDIA_TO_WATCHLIST', payload: addedMedia });
   };
 
   const handleremove = () => {
-    const filteredList = watchList.filter((item) => item.id !== media.id);
     watchListDispatch({
       type: 'REMOVE_MEDIA_FROM_WATCHLIST',
-      payload: filteredList,
+      payload: media.id,
     });
   };
   useEffect(() => {
@@ -64,12 +81,12 @@ const MediaDetails = ({ match }) => {
     return <Spinner />;
   }
   const beautifyCastList = (castList) => {
-    const genresArr = castList ? castList.map((genre) => genre.name) : [];
-    return genresArr.join(', ');
+    const castArr = castList ? castList.map((list) => list.name) : [];
+    return castArr.join(', ');
   };
 
   const renderButtons = () => {
-    const isAdded = watchList.includes(media);
+    const isAdded = watchList.find((item) => item.id === media.id);
     if (!isAdded) {
       return (
         <button onClick={handleAdd} type="button" className="btn btn-add-wish">

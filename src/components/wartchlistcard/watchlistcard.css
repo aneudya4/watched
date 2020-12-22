@@ -1,0 +1,48 @@
+.watch-list-card a {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin: 20px 0;
+  width: 450px;
+  height: 300px;
+}
+.watch-list-card a:hover {
+  transform: scale(1.1);
+  transition: all ease 0.2s;
+}
+
+.watch-list-img {
+  width: 50%;
+  min-width: 225px;
+  max-width: 225px;
+  height: 100%;
+}
+.watch-list img {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
+}
+.watch-list-details {
+  padding: 0 20px;
+}
+.watch-list-details > span.icon {
+  color: gold;
+  margin-bottom: auto;
+  position: absolute;
+  top: 0;
+  right: 5%;
+  font-size: 20px;
+}
+.watch-list-details > * {
+  margin: 10px 0 0 0;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.watch-list-details p span {
+  font-size: 20px;
+}
+.watch-list-details p:last-of-type {
+  font-size: 14px;
+  word-spacing: 5px;
+  line-height: 20px;
+}

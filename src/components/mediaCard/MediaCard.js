@@ -14,7 +14,7 @@ const MediaCard = ({ media, genres }) => {
 
   return (
     <div className="media-card">
-      <Link to={`./dashboard/details/${media.id}`}>
+      <Link to={`/auth/dashboard/details/${media.id}`}>
         <div className="media-img">
           <img
             loading="lazy"
