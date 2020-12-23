@@ -20,7 +20,7 @@ const MediaList = React.memo(() => {
 
   const [mediaCategory, setMediaCategory] = useState('popular');
 
-  const getMEdiaGenres = (genreIds = []) =>
+  const getMediaGenres = (genreIds = []) =>
     genreIds.map((c) => media.genres.find((p) => p.id === c));
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const MediaList = React.memo(() => {
           <MediaCard
             key={mediaData.id}
             media={mediaData}
-            genres={getMEdiaGenres(mediaData.genre_ids)}
+            genres={getMediaGenres(mediaData.genre_ids)}
           />
         ))}
       </div>

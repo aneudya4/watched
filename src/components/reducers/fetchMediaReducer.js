@@ -11,6 +11,8 @@ const fetchMediaReducer = (state = initialState, action) => {
       return { ...state, movies: action.payload };
     case 'MEDIA_GENRES':
       return { ...state, genres: action.payload };
+    case 'SEARCH_MEDIA':
+      return { ...state, movies: action.payload };
 
     default:
       return state;

@@ -1,0 +1,28 @@
+aside.genre-list {
+  width: 200px;
+  padding: 85px 0;
+  background: #17242c;
+  position: fixed;
+  /* height: 100vh; */
+  /* margin-top: 75px; */
+  left: 0;
+  /* top: 0; */
+  top: 0px;
+  height: 100%;
+  overflow: scroll;
+}
+
+aside h3,
+aside ul {
+  padding: 5px 10px;
+}
+
+aside ul li {
+  margin: 20px 0 0 0;
+  cursor: pointer;
+}
+aside ul li i {
+  display: inline-block;
+  font-size: 12px;
+  margin: 0 5px 0 0;
+}

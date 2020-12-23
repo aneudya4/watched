@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import placeHolderImg from '../images/placeholder.svg';
 // eslint-disable-next-line import/no-unresolved
 import './mediacard.css';
 
@@ -12,15 +13,14 @@ const MediaCard = ({ media, genres }) => {
     return genresArr.join(', ');
   };
 
+  const setImg = media.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
+    : placeHolderImg;
   return (
     <div className="media-card">
       <Link to={`/auth/dashboard/details/${media.id}`}>
         <div className="media-img">
-          <img
-            loading="lazy"
-            src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
-            alt={media.title}
-          />
+          <img loading="lazy" src={setImg} alt={media.title} />
         </div>
         <div className="media-info">
           <p className="title">{media.title}</p>

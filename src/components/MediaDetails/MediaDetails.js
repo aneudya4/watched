@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable camelcase */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
@@ -6,7 +7,12 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import Spinner from '../spinner/Spinner';
-import { WatchListContext, DispatchContext } from '../../appContext';
+import {
+  WatchListContext,
+  DispatchContext,
+  MediaContext,
+} from '../../appContext';
+import MediaCard from '../mediacard/MediaCard';
 // eslint-disable-next-line import/no-unresolved
 import './mediadetails.css';
 
@@ -14,9 +20,13 @@ const MediaDetails = ({ match }) => {
   const [media, setMedia] = useState(null);
   const [cast, setCast] = useState(null);
 
-  const { watchListDispatch } = useContext(DispatchContext);
+  const { watchListDispatch, dispatch } = useContext(DispatchContext);
+  const { movies, genres: allGenres } = useContext(MediaContext);
 
   const watchList = useContext(WatchListContext);
+
+  const getMediaGenres = (genreIds = []) =>
+    genreIds.map((c) => allGenres.find((p) => p.id === c));
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -31,7 +41,22 @@ const MediaDetails = ({ match }) => {
       }
     };
     fetchMovieDetails();
-  }, []);
+  }, [match.params.mediaId]);
+
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      try {
+        const results = await fetch(
+          `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
+        );
+        const resultsJson = await results.json();
+        dispatch({ type: 'MEDIA_FETCHING', payload: resultsJson.results });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMovieDetails();
+  }, [match.params.mediaId]);
 
   const handleAdd = () => {
     const {
@@ -136,6 +161,18 @@ const MediaDetails = ({ match }) => {
             <p>{beautifyCastList(cast)}.</p>
           </div>
           <div className="media-action-btns">{renderButtons()}</div>
+        </div>
+      </div>
+      <div className="similar-media">
+        <h3>Similar Media</h3>
+        <div className="similar-media-list">
+          {movies.map((mediaData) => (
+            <MediaCard
+              key={mediaData.id}
+              media={mediaData}
+              genres={getMediaGenres(mediaData.genre_ids)}
+            />
+          ))}
         </div>
       </div>
     </section>
