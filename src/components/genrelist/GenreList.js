@@ -16,7 +16,11 @@ const GenreList = ({ handleOnClick }) => {
       <h3>Genres</h3>
       <ul>
         {genres.map((genre) => (
-          <GenreItem handleOnClick={handleOnClick} genre={genre} />
+          <GenreItem
+            key={genre.id}
+            handleOnClick={handleOnClick}
+            genre={genre}
+          />
         ))}
       </ul>
     </aside>

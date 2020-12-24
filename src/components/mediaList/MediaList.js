@@ -44,7 +44,6 @@ const MediaList = React.memo(() => {
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
   };
-  console.log(media.genres);
   return (
     <section className="media-container">
       <div className="media-options">

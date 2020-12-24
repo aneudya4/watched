@@ -1,6 +1,10 @@
+.media-container {
+  margin-top: 100px;
+  padding-top: 10px;
+}
+
 .media-options {
   color: white;
-  margin-top: 25px;
 }
 
 .media-options ul {

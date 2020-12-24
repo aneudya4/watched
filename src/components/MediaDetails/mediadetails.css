@@ -3,6 +3,7 @@
   max-width: 1400px;
   margin: 0 auto;
   margin-top: 100px;
+  padding-top: 10px;
 }
 .media-details {
   display: flex;
@@ -15,13 +16,13 @@
 .media-details .media-img {
   position: relative;
   width: 400px;
-  height: 500px;
+  height: 600px;
   margin-left: auto;
-  overflow: hidden;
 }
 .media-details .media-img img {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
 }
 
 .media-details .media-img .vote-avg {
@@ -34,18 +35,18 @@
 
 .media-summary {
   display: flex;
-  height: 500px;
+  height: 600px;
   flex-direction: column;
   text-align: justify;
   margin: 0 auto;
   padding: 0 0 0 20px;
 }
 .release-info p {
-  margin: 10px 0;
+  margin: 5px 0 0 0;
 }
 
 .media-summary h3 {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -72,9 +73,12 @@
 .media-summary .media-action-btns {
   margin-top: auto;
 }
+.media-action-btns a {
+  display: inline-block;
+}
 
-.media-summary .btn:not(:first-of-type) {
-  margin: 0 10px;
+.media-action-btns .btn:not(:first-child) {
+  margin: 0 0 0 20px;
 }
 
 .similar-media {

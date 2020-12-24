@@ -6,6 +6,8 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import Spinner from '../spinner/Spinner';
 import {
   WatchListContext,
@@ -41,6 +43,7 @@ const MediaDetails = ({ match }) => {
       }
     };
     fetchMovieDetails();
+    window.scrollTo(0, 0);
   }, [match.params.mediaId]);
 
   useEffect(() => {
@@ -154,17 +157,22 @@ const MediaDetails = ({ match }) => {
 
           <div className="overview">
             <h4>Sypnosis</h4>
-            <p>{media.overview}</p>
+            <p>{media.overview}.</p>
           </div>
           <div className="cast-list">
             <h4>Cast</h4>
             <p>{beautifyCastList(cast)}.</p>
           </div>
-          <div className="media-action-btns">{renderButtons()}</div>
+          <div className="media-action-btns">
+            {renderButtons()}
+            <Link className="btn" to={`/auth/dashboard/reviews/${media.id}`}>
+              Reviews
+            </Link>
+          </div>
         </div>
       </div>
       <div className="similar-media">
-        <h3>Similar Media</h3>
+        <h3>Similar Movies</h3>
         <div className="similar-media-list">
           {movies.map((mediaData) => (
             <MediaCard

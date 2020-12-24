@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
+  scroll-behavior: smooth;
 }
 body {
   background: #0e171d;
@@ -31,4 +32,6 @@ a:active {
   padding: 5px 15px;
   cursor: pointer;
   outline: none;
+  background: whitesmoke;
+  font-size: 14px;
 }
