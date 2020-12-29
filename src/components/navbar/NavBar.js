@@ -17,7 +17,7 @@ const NavBar = () => {
   return (
     <header ref={headerRef} className={scroll ? 'light' : null}>
       <nav>
-        <h1 className="logo">WATCHED</h1>
+        <h1 className="logo">BINGE</h1>
         <ul>
           <li>
             <NavLink to="/login">Log in</NavLink>

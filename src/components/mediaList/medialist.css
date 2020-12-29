@@ -24,10 +24,17 @@ li.selected {
 }
 
 .media-list {
-  max-width: 1400px;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  justify-content: space-between;
   padding: 0 20px;
+}
+
+@media all and (min-width: 990px) {
+  .media-list {
+    max-width: 1400px;
+    margin: 0 auto;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
 }

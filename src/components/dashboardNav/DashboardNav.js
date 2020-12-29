@@ -8,7 +8,7 @@ import './dashboardnav.css';
 const DashboardNav = () => (
   <header className="light">
     <nav>
-      <h1 className="logo">WATCHED</h1>
+      <h1 className="logo">BINGE</h1>
       <ul>
         <li>
           <NavLink activeClassName="selected" to="/auth/dashboard/search">

@@ -69,7 +69,7 @@ const MediaReviews = ({ match }) => {
         </div>
       </div>
       <div className="reviews">
-        <h3>Reviews</h3>
+        <h3>Latest Reviews</h3>
         {reviews.map((review) => {
           return (
             <div key={review.id} className="review">

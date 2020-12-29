@@ -5,8 +5,11 @@
   color: #263742;
   max-width: 1400px;
   display: flex;
-  justify-content: space-around;
-  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* justify-content: flex-end; */
+  overflow: scroll;
 }
 
 .media-reviews h3 {
@@ -17,12 +20,14 @@
 }
 
 .media {
-  align-self: center;
-  position: fixed;
-  left: 20%;
+  /* margin-right: auto; */
+  margin-top: 70px;
+  margin-bottom: 50px;
 }
 .media .media-card {
   margin: 0 auto 90px auto;
+  width: 500px;
+  height: 700px;
 }
 
 .review-box form {
@@ -36,6 +41,7 @@ form button {
   margin: 20px auto 0 auto;
 }
 .review {
+  margin: 0 auto;
   background-color: #fff;
   border-radius: 5px;
   border: 1px solid #263742;
@@ -51,4 +57,23 @@ form button {
 
 textarea {
   resize: none;
+  /* max-width: 800px; */
+  margin: 0 auto;
+}
+
+.reviews {
+  height: 100%;
+  /* margin: 0 auto; */
+}
+
+@media all and (min-width: 990px) {
+  .media-reviews {
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+  }
+
+  .media {
+    margin-bottom: 0;
+  }
 }

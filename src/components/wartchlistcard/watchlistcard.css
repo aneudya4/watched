@@ -1,5 +1,9 @@
+.watch-list-card {
+  margin: 20px auto 0 auto;
+}
 .watch-list-card a {
   display: flex;
+  justify-content: space-around;
   position: relative;
   align-items: center;
   margin: 20px 0;
@@ -45,4 +49,10 @@
   font-size: 14px;
   word-spacing: 5px;
   line-height: 20px;
+}
+
+@media all and (min-width: 990px) {
+  .watch-list-card {
+    margin: 0;
+  }
 }
