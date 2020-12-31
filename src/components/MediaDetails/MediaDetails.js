@@ -7,6 +7,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import placeHolderImg from '../images/placeholder.svg';
 
 import Spinner from '../spinner/Spinner';
 import {
@@ -136,15 +137,14 @@ const MediaDetails = ({ match }) => {
       </button>
     );
   };
-
+  const setImg = media.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
+    : placeHolderImg;
   return (
     <section className="media-data">
       <div className="media-details">
         <div className="media-img">
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
-            alt={media.title}
-          />
+          <img src={setImg} alt={media.title} />
           <span className="vote-avg">{media.vote_average}</span>
         </div>
         <div className="media-summary">
