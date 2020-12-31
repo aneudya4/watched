@@ -36,3 +36,6 @@
   background: #141f25c0;
   transition: all ease-in 0.2s;
 }
+
+@media all and (min-width: 720px) {
+}

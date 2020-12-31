@@ -15,7 +15,7 @@ const Features = () => (
           </span>
           <div className="features-details">
             <h4>Great Entertaiment Library</h4>
-            <p>Find tons of information about movies.</p>
+            <p>Our library includes tons of information about movies.</p>
           </div>
         </div>
         <div className="feature">

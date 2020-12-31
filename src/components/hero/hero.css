@@ -1,7 +1,4 @@
 .hero {
-  /* position: absolute; */
-  /* top: 50%;
-  left: 50%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,12 +11,12 @@
   height: 100vh;
 }
 .app-info {
-  width: 600px;
   transform: translate(0%, -50%);
 }
 
 .app-info p {
   font-weight: bolder;
+  /* font-size: 14px; */
   margin-bottom: 10px;
 }
 
@@ -30,7 +27,8 @@
 }
 
 .app-info h2 {
-  font-size: 50px;
+  font-size: 20px;
+  word-wrap: break-word;
 }
 
 .app-info a {
@@ -46,4 +44,13 @@
   background: white;
   color: black;
   transition: all ease-in 0.2s;
+}
+
+@media all and (min-width: 720px) {
+  .app-info {
+    width: 600px;
+  }
+  .app-info h2 {
+    font-size: 50px;
+  }
 }

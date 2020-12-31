@@ -35,3 +35,9 @@ a:active {
   background: whitesmoke;
   font-size: 14px;
 }
+
+.error {
+  color: tomato;
+  text-align: center;
+  display: block;
+}

@@ -1,0 +1,65 @@
+.auth-form {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  padding: 15px 25px;
+  border-radius: 4px;
+  transform: translate(-50%, -155%);
+  opacity: 0.2;
+  transition: all ease-out 0.5s;
+}
+
+.login {
+  height: 350px;
+}
+
+div.show-login,
+div.show-register {
+  transform: translate(-50%, 5%);
+  opacity: 1;
+  transition: all ease-in 0.5s;
+}
+
+.auth-form h4 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+}
+.auth-form form label {
+  padding: 15px 0;
+}
+.auth-form form input {
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+.login form i {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.auth-btns button {
+  color: white;
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 17px;
+  border: 0;
+  outline: none;
+  border-radius: 3px;
+}
+
+.auth-btns button:first-of-type {
+  background: rgb(48, 122, 81);
+}
+
+.auth-btns button:last-of-type {
+  background: #8a221f;
+  margin-left: 5px;
+}
