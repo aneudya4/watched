@@ -47,18 +47,20 @@ const MediaDetails = ({ match }) => {
   }, [match.params.mediaId]);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const results = await fetch(
-          `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-        );
-        const resultsJson = await results.json();
-        dispatch({ type: 'MEDIA_FETCHING', payload: resultsJson.results });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovieDetails();
+    if (match.params.mediaId) {
+      const fetchSimilarMedia = async () => {
+        try {
+          const results = await fetch(
+            `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
+          );
+          const resultsJson = await results.json();
+          dispatch({ type: 'MEDIA_FETCHING', payload: resultsJson.results });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchSimilarMedia();
+    }
   }, [match.params.mediaId]);
 
   const handleAdd = () => {
