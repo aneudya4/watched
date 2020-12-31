@@ -17,6 +17,7 @@ function App() {
   const mediaInitialState = {
     movies: [],
     genres: [],
+    similarMovies: [],
   };
   const watchListInitialState = [];
   const authInitialState = {

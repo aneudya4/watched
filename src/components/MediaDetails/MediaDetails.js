@@ -23,7 +23,7 @@ const MediaDetails = ({ match }) => {
   const [cast, setCast] = useState(null);
 
   const { watchListDispatch, dispatch } = useContext(DispatchContext);
-  const { movies, genres: allGenres } = useContext(MediaContext);
+  const { similarMovies, genres: allGenres } = useContext(MediaContext);
 
   const watchList = useContext(WatchListContext);
 
@@ -47,21 +47,24 @@ const MediaDetails = ({ match }) => {
   }, [match.params.mediaId]);
 
   useEffect(() => {
-    if (match.params.mediaId) {
-      const fetchSimilarMedia = async () => {
-        try {
-          const results = await fetch(
-            `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-          );
-          const resultsJson = await results.json();
-          dispatch({ type: 'MEDIA_FETCHING', payload: resultsJson.results });
-        } catch (error) {
-          console.log(error);
+    const fetchSimilarMedia = async () => {
+      try {
+        const results = await fetch(
+          `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
+        );
+        const resultsJson = await results.json();
+        if (resultsJson.results.length > 0) {
+          dispatch({
+            type: 'SIMILAR_MEDIA_FETCHING',
+            payload: resultsJson.results,
+          });
         }
-      };
-      fetchSimilarMedia();
-    }
-  }, [match.params.mediaId]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSimilarMedia();
+  }, []);
 
   const handleAdd = () => {
     const {
@@ -93,7 +96,7 @@ const MediaDetails = ({ match }) => {
   };
   useEffect(() => {
     if (media) {
-      const fetchMovieDetails = async () => {
+      const fetchCast = async () => {
         try {
           const results = await fetch(
             `https://api.themoviedb.org/3/movie/${media.id}/credits?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
@@ -104,7 +107,7 @@ const MediaDetails = ({ match }) => {
           console.log(error);
         }
       };
-      fetchMovieDetails();
+      fetchCast();
     }
   }, [media]);
   if (!media) {
@@ -176,7 +179,7 @@ const MediaDetails = ({ match }) => {
       <div className="similar-media">
         <h3>Similar Movies</h3>
         <div className="similar-media-list">
-          {movies.map((mediaData) => (
+          {similarMovies.map((mediaData) => (
             <MediaCard
               key={mediaData.id}
               media={mediaData}
