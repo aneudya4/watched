@@ -7,11 +7,19 @@ const Register = () => {
   const { auth, authDispatch } = useContext(AuthFormsContext);
 
   const showRegister = auth.showRegister ? 'show-register' : null;
+
+  const handleOnClickCancel = () => {
+    authDispatch({ type: 'HIDE_REGISTER' });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className={`register auth-form  ${showRegister}`}>
       <span className="error">*Registrations not set up yet*</span>
       <h4>REGISTER</h4>
-      <form>
+      <form onSubmit={onSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" placeholder="John Doe" />
         <label htmlFor="email-register">Email:</label>
@@ -29,7 +37,7 @@ const Register = () => {
           <button className="btn" type="submit">
             Register
           </button>
-          <button className="btn" type="button">
+          <button onClick={handleOnClickCancel} className="btn" type="button">
             Cancel
           </button>
         </div>

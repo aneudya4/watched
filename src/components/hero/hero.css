@@ -31,16 +31,21 @@
   word-wrap: break-word;
 }
 
-.app-info a {
+.app-info button {
   font-size: 13px;
   display: inline-block;
   padding: 5px 20px;
   margin: 10px;
   border: 2px solid white;
   border-radius: 2px;
+  background: #0e171d;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
 }
 
-.app-info a:hover {
+.app-info button:hover {
   background: white;
   color: black;
   transition: all ease-in 0.2s;
