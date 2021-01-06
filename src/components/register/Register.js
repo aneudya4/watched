@@ -1,9 +1,17 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unreachable */
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { AuthFormsContext } from '../../appContext';
 
-const Register = () => {
+import firebaseApp from '../../firebase';
+
+const Register = ({ history }) => {
   const { auth, authDispatch } = useContext(AuthFormsContext);
 
   const showRegister = auth.showRegister ? 'show-register' : null;
@@ -12,9 +20,27 @@ const Register = () => {
     authDispatch({ type: 'HIDE_REGISTER' });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const { name, email, password } = e.target.elements;
+    console.log(email.value, password.value);
+    try {
+      await firebaseApp
+        .auth()
+        .createUserWithEmailAndPassword(email.value, password.value)
+        .then((result) => {
+          result.user.updateProfile({
+            displayName: name.value,
+          });
+          authDispatch({ type: 'REGISTER_USER', payload: result });
+        });
+
+      history.push('/auth/dashboard/media');
+    } catch (error) {
+      console.log(error);
+    }
   };
+  console.log(auth);
   return (
     <div className={`register auth-form  ${showRegister}`}>
       <span className="error">*Registrations not set up yet*</span>
@@ -45,4 +71,4 @@ const Register = () => {
     </div>
   );
 };
-export default Register;
+export default withRouter(Register);

@@ -21,8 +21,6 @@ const NavBar = () => {
     setScroll(window.scrollY >= 20);
   };
 
-  // window.addEventListener('scroll', changeBackground);
-
   const handleClickRegister = () => {
     if (auth.showRegister) {
       authDispatch({ type: 'HIDE_REGISTER' });
@@ -32,7 +30,6 @@ const NavBar = () => {
   };
 
   const handleClickLogin = () => {
-    console.log('mmg');
     if (auth.showLogin) {
       authDispatch({ type: 'HIDE_LOGIN' });
     } else {
@@ -52,20 +49,32 @@ const NavBar = () => {
     };
   }, []);
 
-  return (
-    <header ref={headerRef} className={scroll ? 'light' : null}>
-      <nav>
-        <h1 className="logo">BINGE</h1>
-        <ul>
-          <li onClick={handleClickLogin}>Log In</li>
-          <li onClick={handleClickRegister}>Register</li>
+  const renderNavigation = () => {
+    if (auth.isAuth) {
+      return (
+        <>
           <li>
             <NavLink to="/auth/dashboard/media">Dashboard</NavLink>
           </li>
           <li>
             <NavLink to="/">Log Out</NavLink>
           </li>
-        </ul>
+        </>
+      );
+    }
+    return (
+      <>
+        <li onClick={handleClickLogin}>Log In</li>
+        <li onClick={handleClickRegister}>Register</li>
+      </>
+    );
+  };
+
+  return (
+    <header ref={headerRef} className={scroll ? 'light' : null}>
+      <nav>
+        <h1 className="logo">BINGE</h1>
+        <ul>{renderNavigation()}</ul>
       </nav>
     </header>
   );

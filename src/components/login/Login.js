@@ -1,9 +1,12 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
+import firebaseApp from '../../firebase';
 import { AuthFormsContext } from '../../appContext';
 import './login.css';
 
@@ -16,15 +19,30 @@ const Login = ({ history }) => {
     authDispatch({ type: 'HIDE_LOGIN' });
   };
 
-  const handleLogin = () => {
-    history.push('/auth/dashboard/media');
-  };
+  const handleLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const { email, password } = e.target.elements;
+      try {
+        await firebaseApp
+          .auth()
+          .signInWithEmailAndPassword(email.value, password.value)
+          .then((userData) =>
+            authDispatch({ type: 'LOG_IN_USER', payload: userData }),
+          );
 
+        history.push('/auth/dashboard/media');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [history],
+  );
   return (
     <div className={`login auth-form ${showLogin}`}>
       <span className="error">*LOGIN IS NOT SET UP YET*</span>
       <h4>Log In</h4>
-      <form>
+      <form onSubmit={handleLogin}>
         <label htmlFor="email">
           <i className="fas fa-envelope" />
           Email address :
@@ -38,7 +56,7 @@ const Login = ({ history }) => {
         <input id="password" type="password" />
 
         <div className="auth-btns">
-          <button onClick={handleLogin} className="btn" type="submit">
+          <button className="btn" type="submit">
             Log In
           </button>
           <button onClick={handleOnClickCancel} className="btn" type="button">

@@ -17,7 +17,7 @@ const WatchListCard = ({ media }) => {
         <div className="watch-list-img">
           <img
             src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
-            alt="mmg"
+            alt={media.title}
           />
         </div>
 

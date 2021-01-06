@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 
 import AppRouter from '../routers/AppRouter';
 import {
@@ -8,12 +8,14 @@ import {
   WatchListContext,
   AuthFormsContext,
 } from '../../appContext';
+import firebaseApp from '../../firebase';
 import fetchMediaReducer from '../reducers/fetchMediaReducer';
 import authFormsReducer from '../reducers/authFormsReducers';
 import watchListReducer from '../reducers/watchListReducer';
 import './App.css';
 
 function App() {
+  const [user, setCurrentUser] = useState(null);
   const mediaInitialState = {
     movies: [],
     genres: [],
@@ -23,6 +25,8 @@ function App() {
   const authInitialState = {
     showLogin: false,
     showRegister: false,
+    isAuth: false,
+    user,
   };
 
   const [media, dispatch] = useReducer(fetchMediaReducer, mediaInitialState);
@@ -33,6 +37,9 @@ function App() {
     watchListInitialState,
   );
 
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged(setCurrentUser);
+  }, []);
   return (
     <AuthFormsContext.Provider value={{ auth, authDispatch }}>
       <MediaContext.Provider value={media}>

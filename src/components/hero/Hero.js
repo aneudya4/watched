@@ -16,6 +16,11 @@ const Hero = () => {
   const handleClickRegister = () => {
     authDispatch({ type: 'SHOW_REGISTER' });
   };
+
+  const showLoginClass = auth.showLogin ? 'selected-auth' : null;
+  const showRegister = auth.showRegister ? 'selected-auth' : null;
+
+  console.log(auth);
   return (
     <div className="hero">
       <div className="app-info">
@@ -25,8 +30,12 @@ const Hero = () => {
           <span> BEST </span>
           MULTIMEDIA BROWSER
         </h2>
-        <button onClick={handleClickLogin}>Log In</button>
-        <button onClick={handleClickRegister}>Register</button>
+        <button className={showLoginClass} onClick={handleClickLogin}>
+          Log In
+        </button>
+        <button className={showRegister} onClick={handleClickRegister}>
+          Register
+        </button>
       </div>
     </div>
   );

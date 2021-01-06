@@ -56,7 +56,7 @@ const MediaList = React.memo(() => {
           <li
             className={mediaCategory === 'now_playing' ? 'selected' : null}
             onClick={() => onMediaSelect('now_playing')}>
-            Now Playing
+            In Theaters
           </li>
           <li
             className={mediaCategory === 'top_rated' ? 'selected' : null}

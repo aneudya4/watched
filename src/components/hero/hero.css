@@ -16,7 +16,6 @@
 
 .app-info p {
   font-weight: bolder;
-  /* font-size: 14px; */
   margin-bottom: 10px;
 }
 
@@ -46,6 +45,12 @@
 }
 
 .app-info button:hover {
+  background: white;
+  color: black;
+  transition: all ease-in 0.2s;
+}
+
+.app-info button.selected-auth {
   background: white;
   color: black;
   transition: all ease-in 0.2s;

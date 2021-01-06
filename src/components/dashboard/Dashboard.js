@@ -10,10 +10,11 @@ import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
 import MediaReviews from '../mediareviews/MediaReviews';
-import { DispatchContext } from '../../appContext';
+import { DispatchContext, AuthFormsContext } from '../../appContext';
 
 const DashBoard = ({ match }) => {
   const { dispatch } = useContext(DispatchContext);
+  const { auth } = useContext(AuthFormsContext);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -49,6 +50,10 @@ const DashBoard = ({ match }) => {
     };
     fetchGeres();
   }, []);
+
+  if (!auth.isAuth) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="dashboard">
