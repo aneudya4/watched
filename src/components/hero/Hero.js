@@ -20,7 +20,6 @@ const Hero = () => {
   const showLoginClass = auth.showLogin ? 'selected-auth' : null;
   const showRegister = auth.showRegister ? 'selected-auth' : null;
 
-  console.log(auth);
   return (
     <div className="hero">
       <div className="app-info">

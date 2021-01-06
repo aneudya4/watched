@@ -12,7 +12,7 @@ import SearchMedia from '../searchmedia/SearchMedia';
 import MediaReviews from '../mediareviews/MediaReviews';
 import { DispatchContext, AuthFormsContext } from '../../appContext';
 
-const DashBoard = ({ match }) => {
+const DashBoard = ({ match, history }) => {
   const { dispatch } = useContext(DispatchContext);
   const { auth } = useContext(AuthFormsContext);
 
@@ -54,6 +54,8 @@ const DashBoard = ({ match }) => {
   if (!auth.isAuth) {
     return <Redirect to="/" />;
   }
+
+  localStorage.setItem('lastPath', history.location.pathname);
 
   return (
     <div className="dashboard">

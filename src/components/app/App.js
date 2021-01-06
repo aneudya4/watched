@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useReducer, useEffect, useState } from 'react';
 
@@ -14,7 +15,7 @@ import authFormsReducer from '../reducers/authFormsReducers';
 import watchListReducer from '../reducers/watchListReducer';
 import './App.css';
 
-function App() {
+function App({ history }) {
   const [user, setCurrentUser] = useState(null);
   const mediaInitialState = {
     movies: [],
@@ -39,7 +40,14 @@ function App() {
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged(setCurrentUser);
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      authDispatch({ type: 'LOG_IN_USER', payload: user });
+    }
+  }, [user]);
+
   return (
     <AuthFormsContext.Provider value={{ auth, authDispatch }}>
       <MediaContext.Provider value={media}>

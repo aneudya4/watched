@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 import React, { lazy, Suspense } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePageRoutes from './HomePageRoutes';

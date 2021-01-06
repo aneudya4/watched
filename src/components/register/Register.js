@@ -23,7 +23,6 @@ const Register = ({ history }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = e.target.elements;
-    console.log(email.value, password.value);
     try {
       await firebaseApp
         .auth()
@@ -40,10 +39,8 @@ const Register = ({ history }) => {
       console.log(error);
     }
   };
-  console.log(auth);
   return (
     <div className={`register auth-form  ${showRegister}`}>
-      <span className="error">*Registrations not set up yet*</span>
       <h4>REGISTER</h4>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name:</label>

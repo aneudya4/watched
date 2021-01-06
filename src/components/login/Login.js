@@ -40,7 +40,6 @@ const Login = ({ history }) => {
   );
   return (
     <div className={`login auth-form ${showLogin}`}>
-      <span className="error">*LOGIN IS NOT SET UP YET*</span>
       <h4>Log In</h4>
       <form onSubmit={handleLogin}>
         <label htmlFor="email">

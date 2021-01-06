@@ -6,14 +6,14 @@
 /* eslint-disable no-return-assign */
 import React, { useContext } from 'react';
 
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthFormsContext } from '../../appContext';
 
 import firebaseApp from '../../firebase';
 // eslint-disable-next-line import/no-unresolved
 import './dashboardnav.css';
 
-const DashboardNav = (props) => {
+const DashboardNav = () => {
   const { auth, authDispatch } = useContext(AuthFormsContext);
 
   const handleLogout = () => {
@@ -24,7 +24,6 @@ const DashboardNav = (props) => {
         authDispatch({ type: 'LOG_OUT_USER' });
       });
   };
-  console.log(props, '/here');
   return (
     <header className="light">
       <nav>
