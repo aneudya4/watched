@@ -7,13 +7,9 @@ import { Link } from 'react-router-dom';
 import './watchlistcard.css';
 
 const WatchListCard = ({ media }) => {
-  const beautifyGenreList = (genreList) => {
-    const genresArr = genreList[0] ? genreList.map((genre) => genre.name) : [];
-    return genresArr.join(', ');
-  };
   return (
     <div className="watch-list-card">
-      <Link to={`/auth/dashboard/details/${media.id}`}>
+      <Link to={`/auth/dashboard/details/${media.movieId}`}>
         <div className="watch-list-img">
           <img
             src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
@@ -30,7 +26,7 @@ const WatchListCard = ({ media }) => {
           <p>
             {media.status}: <span>{media.release_date.slice(0, 4)} </span>
           </p>
-          <p>{beautifyGenreList(media.genres)}</p>
+          <p>{media.genres}</p>
         </div>
       </Link>
     </div>

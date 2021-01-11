@@ -26,7 +26,7 @@ function App({ history }) {
   const authInitialState = {
     showLogin: false,
     showRegister: false,
-    isAuth: false,
+    isAuth: null,
     user,
   };
 

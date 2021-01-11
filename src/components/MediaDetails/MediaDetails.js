@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-useless-return */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable camelcase */
 /* eslint-disable object-curly-newline */
@@ -14,6 +16,7 @@ import {
   WatchListContext,
   DispatchContext,
   MediaContext,
+  AuthFormsContext,
 } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
 // eslint-disable-next-line import/no-unresolved
@@ -22,7 +25,7 @@ import './mediadetails.css';
 const MediaDetails = ({ match }) => {
   const [media, setMedia] = useState(null);
   const [cast, setCast] = useState(null);
-
+  const { auth } = useContext(AuthFormsContext);
   const { watchListDispatch, dispatch } = useContext(DispatchContext);
   const { similarMovies, genres: allGenres } = useContext(MediaContext);
 
@@ -77,22 +80,50 @@ const MediaDetails = ({ match }) => {
       poster_path,
       genres,
     } = media;
+
+    const genresList = genres.map((genre) => genre.name).join(', ');
     const addedMedia = {
-      id,
+      movieId: id,
       title,
       release_date,
-      runtime,
+      runtime: runtime === 0 ? 'Not Available' : runtime.toString(),
       status,
       poster_path,
-      genres,
+      genres: genresList,
+      userId: auth.user.uid,
     };
-    watchListDispatch({ type: 'ADD_MEDIA_TO_WATCHLIST', payload: addedMedia });
+
+    watchListDispatch({
+      type: 'ADD_MEDIA_TO_WATCHLIST',
+      payload: addedMedia,
+    });
+    fetch(`http://localhost:3001/api/watchlist/${auth.user.uid}`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${123456}`,
+      },
+      body: JSON.stringify(addedMedia),
+    }).then((res) => {
+      if (!res.ok) return res.json().then((e) => Promise.reject(e));
+      return res.json();
+    });
   };
 
   const handleremove = () => {
     watchListDispatch({
       type: 'REMOVE_MEDIA_FROM_WATCHLIST',
       payload: media.id,
+    });
+    fetch(`http://localhost:3001/api/watchlist/${media.id}/${auth.user.uid}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${123456}`,
+      },
+    }).then((res) => {
+      if (!res.ok) return res.json().then((e) => Promise.reject(e));
+      return;
     });
   };
   useEffect(() => {
@@ -120,7 +151,7 @@ const MediaDetails = ({ match }) => {
   };
 
   const renderButtons = () => {
-    const isAdded = watchList.find((item) => item.id === media.id);
+    const isAdded = watchList.find((item) => item.movieId === media.id);
     if (!isAdded) {
       return (
         <button onClick={handleAdd} type="button" className="btn btn-add-wish">

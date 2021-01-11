@@ -13,7 +13,7 @@ import MediaReviews from '../mediareviews/MediaReviews';
 import { DispatchContext, AuthFormsContext } from '../../appContext';
 
 const DashBoard = ({ match, history }) => {
-  const { dispatch } = useContext(DispatchContext);
+  const { watchListDispatch, dispatch } = useContext(DispatchContext);
   const { auth } = useContext(AuthFormsContext);
 
   useEffect(() => {
@@ -51,7 +51,27 @@ const DashBoard = ({ match, history }) => {
     fetchGeres();
   }, []);
 
-  if (!auth.isAuth) {
+  useEffect(() => {
+    if (auth.isAuth) {
+      const fetchWatchList = async () => {
+        try {
+          const results = await fetch(
+            `http://localhost:3001/api/watchlist/${auth.user.uid}`,
+          );
+          const resultsJson = await results.json();
+          watchListDispatch({
+            type: 'GET_WATCHLIST',
+            payload: resultsJson,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchWatchList();
+    }
+  }, [auth.isAuth]);
+
+  if (auth.isAuth === false) {
     return <Redirect to="/" />;
   }
 

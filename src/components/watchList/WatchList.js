@@ -1,15 +1,17 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState } from 'react';
-import { WatchListContext } from '../../appContext';
+import { WatchListContext, DispatchContext } from '../../appContext';
 import WatchListCard from '../wartchlistcard/WatchListCard';
 // eslint-disable-next-line import/no-unresolved
 import './watchlist.css';
 
 const WatchList = () => {
   const watchList = useContext(WatchListContext);
+
   const [input, setInput] = useState('');
 
   const filterList = watchList.filter((list) =>
@@ -31,7 +33,7 @@ const WatchList = () => {
 
       <div className="watch-list-collection">
         {filterList.map((media) => (
-          <WatchListCard key={media.id} media={media} />
+          <WatchListCard key={media.movieId} media={media} />
         ))}
       </div>
     </section>
