@@ -70,7 +70,7 @@ const MediaDetails = ({ match }) => {
       }
     };
     fetchSimilarMedia();
-  }, []);
+  }, [match.params.mediaId]);
 
   const handleAdd = () => {
     const {
@@ -95,7 +95,6 @@ const MediaDetails = ({ match }) => {
       userId: auth.user.uid,
     };
 
-    console.log(addedMedia, 'qui');
     watchListDispatch({
       type: 'ADD_MEDIA_TO_WATCHLIST',
       payload: addedMedia,
