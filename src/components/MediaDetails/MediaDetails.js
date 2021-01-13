@@ -53,20 +53,20 @@ const MediaDetails = ({ match }) => {
 
   useEffect(() => {
     const fetchSimilarMedia = async () => {
-      console.log('mmg');
+      console.log('mmg AQUI');
       try {
         const results = await fetch(
           `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
         );
         const resultsJson = await results.json();
-        if (resultsJson.results.length > 0) {
-          dispatch({
-            type: 'SIMILAR_MEDIA_FETCHING',
-            payload: resultsJson.results,
-          });
-        }
+
+        dispatch({
+          type: 'SIMILAR_MEDIA_FETCHING',
+          payload: resultsJson.results,
+        });
       } catch (error) {
-        console.log(error);
+        console.log(error, 'error');
+        // console.log(error);
       }
     };
     fetchSimilarMedia();
@@ -174,7 +174,6 @@ const MediaDetails = ({ match }) => {
     ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
     : placeHolderImg;
 
-  console.log(media);
   return (
     <section className="media-data">
       <div className="media-details">
@@ -208,10 +207,13 @@ const MediaDetails = ({ match }) => {
       </div>
       <div className="similar-media">
         <h3>Similar Movies</h3>
+
+        {similarMovies.length === 0 && (
+          <p className="no-results">
+            We could not find similar movies <i className="fas fa-box-open" />
+          </p>
+        )}
         <div className="similar-media-list">
-          {similarMovies.length === 0 && (
-            <p> We could not find similar movies</p>
-          )}
           {similarMovies.map((mediaData) => (
             <MediaCard
               key={mediaData.id}

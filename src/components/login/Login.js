@@ -38,7 +38,6 @@ const Login = ({ history }) => {
           .then((userData) =>
             authDispatch({ type: 'LOG_IN_USER', payload: userData }),
           );
-        setShowError(false);
 
         history.push('/auth/dashboard/media');
       } catch (error) {
@@ -59,7 +58,6 @@ const Login = ({ history }) => {
         .then((userData) =>
           authDispatch({ type: 'LOG_IN_USER', payload: userData }),
         );
-      setShowError(false);
 
       history.push('/auth/dashboard/media');
     } catch (error) {

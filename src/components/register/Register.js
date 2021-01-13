@@ -75,7 +75,7 @@ const Register = ({ history }) => {
       </form>
       <p>
         Already have an account ?
-        <span onClick={handleOnClickLogin}>Log In</span>
+        <span onClick={handleOnClickLogin}> Log In</span>
       </p>
     </div>
   );
