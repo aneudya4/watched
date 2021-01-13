@@ -47,8 +47,6 @@ One app. Easy to use. Unlimited possibilities. My goal is simple: BINGE combines
 
 - Binge is a mobile responsive app that was implemented with React, Node, Express,Firebase for authentication and postgresSQL
 
-<p align="center"><img  src="./readme_assets/overview.png" width="70%"></p>
-
 ### Watchlist:
 
 User will see a list of movies added by themselves to the watchlist
