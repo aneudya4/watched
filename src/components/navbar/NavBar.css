@@ -41,9 +41,11 @@ nav ul {
   margin-left: auto;
   display: flex;
 }
+nav ul li {
+  font-size: 17px;
+  font-weight: 400;
+}
 
 nav ul li:not(:last-child) {
   margin: 0 10px;
-  font-size: 17px;
-  font-weight: bold;
 }
