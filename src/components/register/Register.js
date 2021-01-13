@@ -1,23 +1,28 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unreachable */
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-
 import { AuthFormsContext } from '../../appContext';
-
 import firebaseApp from '../../firebase';
 
 const Register = ({ history }) => {
   const { auth, authDispatch } = useContext(AuthFormsContext);
+  const [showError, setShowError] = useState(false);
 
   const showRegister = auth.showRegister ? 'show-register' : null;
 
   const handleOnClickCancel = () => {
     authDispatch({ type: 'HIDE_REGISTER' });
+  };
+  const handleOnClickLogin = () => {
+    authDispatch({ type: 'SHOW_LOGIN' });
   };
 
   const onSubmit = async (e) => {
@@ -36,12 +41,15 @@ const Register = ({ history }) => {
 
       history.push('/auth/dashboard/media');
     } catch (error) {
-      console.log(error);
+      setShowError(true);
     }
   };
   return (
     <div className={`register auth-form  ${showRegister}`}>
       <h4>REGISTER</h4>
+
+      {showError && <p className="error">Account already exist</p>}
+
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" placeholder="John Doe" />
@@ -57,7 +65,7 @@ const Register = ({ history }) => {
         <input type="password" id="password-register" name="password" />
 
         <div className="auth-btns">
-          <button className="btn" type="submit">
+          <button className="btn primary" type="submit">
             Register
           </button>
           <button onClick={handleOnClickCancel} className="btn" type="button">
@@ -65,6 +73,10 @@ const Register = ({ history }) => {
           </button>
         </div>
       </form>
+      <p>
+        Already have an account ?
+        <span onClick={handleOnClickLogin}>Log In</span>
+      </p>
     </div>
   );
 };
