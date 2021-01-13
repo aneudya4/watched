@@ -9,8 +9,8 @@ import MediaList from '../mediaList/MediaList';
 import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
-import MediaReviews from '../mediareviews/MediaReviews';
 import { DispatchContext, AuthFormsContext } from '../../appContext';
+import config from '../config';
 
 const DashBoard = ({ match, history }) => {
   const { watchListDispatch, dispatch } = useContext(DispatchContext);
@@ -56,7 +56,14 @@ const DashBoard = ({ match, history }) => {
       const fetchWatchList = async () => {
         try {
           const results = await fetch(
-            `http://localhost:3001/api/watchlist/${auth.user.uid}`,
+            `${config.API_ENDPOINT}${auth.user.uid}`,
+            {
+              method: 'GET',
+              headers: {
+                'content-type': 'application/json',
+                Authorization: `Bearer ${config.API_KEY}`,
+              },
+            },
           );
           const resultsJson = await results.json();
           watchListDispatch({
@@ -89,11 +96,6 @@ const DashBoard = ({ match, history }) => {
           exact
           path={`${match.path}details/:mediaId`}
           component={MediaDetails}
-        />
-        <Route
-          exact
-          path={`${match.path}reviews/:mediaId`}
-          component={MediaReviews}
         />
 
         <Redirect to="/" />

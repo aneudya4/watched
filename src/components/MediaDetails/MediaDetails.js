@@ -20,6 +20,7 @@ import {
 } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
 // eslint-disable-next-line import/no-unresolved
+import config from '../config';
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
@@ -52,6 +53,7 @@ const MediaDetails = ({ match }) => {
 
   useEffect(() => {
     const fetchSimilarMedia = async () => {
+      console.log('mmg');
       try {
         const results = await fetch(
           `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
@@ -97,11 +99,11 @@ const MediaDetails = ({ match }) => {
       type: 'ADD_MEDIA_TO_WATCHLIST',
       payload: addedMedia,
     });
-    fetch(`http://localhost:3001/api/watchlist/${auth.user.uid}`, {
+    fetch(`${config.API_ENDPOINT}${auth.user.uid}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        Authorization: `Bearer ${123456}`,
+        Authorization: `Bearer ${config.API_KEY}`,
       },
       body: JSON.stringify(addedMedia),
     }).then((res) => {
@@ -115,11 +117,11 @@ const MediaDetails = ({ match }) => {
       type: 'REMOVE_MEDIA_FROM_WATCHLIST',
       payload: media.id,
     });
-    fetch(`http://localhost:3001/api/watchlist/${media.id}/${auth.user.uid}`, {
+    fetch(`${config.API_ENDPOINT}${media.id}/${auth.user.uid}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
-        Authorization: `Bearer ${123456}`,
+        Authorization: `Bearer ${config.API_KEY}`,
       },
     }).then((res) => {
       if (!res.ok) return res.json().then((e) => Promise.reject(e));
@@ -171,6 +173,7 @@ const MediaDetails = ({ match }) => {
   const setImg = media.poster_path
     ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
     : placeHolderImg;
+
   return (
     <section className="media-data">
       <div className="media-details">
@@ -199,12 +202,7 @@ const MediaDetails = ({ match }) => {
             <h4>Cast</h4>
             <p>{beautifyCastList(cast)}.</p>
           </div>
-          <div className="media-action-btns">
-            {renderButtons()}
-            <Link className="btn" to={`/auth/dashboard/reviews/${media.id}`}>
-              Reviews
-            </Link>
-          </div>
+          <div className="media-action-btns">{renderButtons()}</div>
         </div>
       </div>
       <div className="similar-media">
