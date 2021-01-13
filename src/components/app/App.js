@@ -15,7 +15,7 @@ import authFormsReducer from '../reducers/authFormsReducers';
 import watchListReducer from '../reducers/watchListReducer';
 import './App.css';
 
-function App({ history }) {
+function App() {
   const [user, setCurrentUser] = useState(null);
   const mediaInitialState = {
     movies: [],

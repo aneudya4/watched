@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on the <HomePage/> Component renders App without crashing 1`] = `
+<Fragment>
+  <Hero />
+  <About />
+  <Features />
+  <withRouter(Login) />
+  <withRouter(Register) />
+</Fragment>
+`;

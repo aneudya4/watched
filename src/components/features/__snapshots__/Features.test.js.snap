@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on the <Dashboard/> Component renders App without crashing 1`] = `
+<section
+  className="features"
+>
+  <div
+    className="all-features"
+  >
+    <h3>
+      Features
+      <span>
+         . 
+      </span>
+    </h3>
+    <div
+      className="features-container"
+    >
+      <div
+        className="feature"
+      >
+        <span
+          className="icon"
+        >
+          <i
+            className="fas fa-gift"
+          />
+        </span>
+        <div
+          className="features-details"
+        >
+          <h4>
+            Great Entertaiment Library
+          </h4>
+          <p>
+            Our library includes tons of information about movies.
+          </p>
+        </div>
+      </div>
+      <div
+        className="feature"
+      >
+        <span
+          className="icon"
+        >
+          <i
+            className="fas fa-list"
+          />
+        </span>
+        <div
+          className="features-details"
+        >
+          <h4>
+            Keep a record of your media
+          </h4>
+          <p>
+            Combine the best content into one easy-to-use web app.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`Test on the <Features/> Component renders App without crashing 1`] = `
+<section
+  className="features"
+>
+  <div
+    className="all-features"
+  >
+    <h3>
+      Features
+      <span>
+         . 
+      </span>
+    </h3>
+    <div
+      className="features-container"
+    >
+      <div
+        className="feature"
+      >
+        <span
+          className="icon"
+        >
+          <i
+            className="fas fa-gift"
+          />
+        </span>
+        <div
+          className="features-details"
+        >
+          <h4>
+            Great Entertaiment Library
+          </h4>
+          <p>
+            Our library includes tons of information about movies.
+          </p>
+        </div>
+      </div>
+      <div
+        className="feature"
+      >
+        <span
+          className="icon"
+        >
+          <i
+            className="fas fa-list"
+          />
+        </span>
+        <div
+          className="features-details"
+        >
+          <h4>
+            Keep a record of your media
+          </h4>
+          <p>
+            Combine the best content into one easy-to-use web app.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;

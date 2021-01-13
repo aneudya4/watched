@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on the <App/> Component renders App without crashing 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "auth": Object {
+        "isAuth": null,
+        "showLogin": false,
+        "showRegister": false,
+        "user": null,
+      },
+      "authDispatch": [Function],
+    }
+  }
+>
+  <ContextProvider
+    value={
+      Object {
+        "genres": Array [],
+        "movies": Array [],
+        "similarMovies": Array [],
+      }
+    }
+  >
+    <ContextProvider
+      value={
+        Object {
+          "dispatch": [Function],
+          "watchListDispatch": [Function],
+        }
+      }
+    >
+      <ContextProvider
+        value={Array []}
+      >
+        <div
+          className="App"
+        >
+          <AppRouter />
+        </div>
+      </ContextProvider>
+    </ContextProvider>
+  </ContextProvider>
+</ContextProvider>
+`;
