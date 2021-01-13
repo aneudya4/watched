@@ -1,8 +1,8 @@
 .watch-list {
   color: white;
   text-align: center;
-  margin-top: 100px;
-  margin: 0 auto;
+  margin-top: 150px;
+  /* margin: 0 auto; */
   padding-top: 10px;
 }
 
@@ -12,10 +12,11 @@
 
 .watch-list label input {
   width: 250px;
-  padding: 10px;
+  padding: 10px 0;
   outline: none;
   border-radius: 5px;
   font-size: 16px;
+  margin-top: 50px;
 }
 .watch-list label i {
   position: absolute;

@@ -10,7 +10,26 @@
 .dashboard header nav > * {
   color: black;
 }
+.dashboard header.light nav {
+  flex-direction: column !important;
+}
+.dashboard header.light nav ul {
+  margin-top: 15px;
+  margin-left: 0;
+}
 a.selected {
   border-bottom: 1px solid rgba(247, 179, 78, 0.959);
   padding: 0 0 5px 0;
+}
+
+@media all and (min-width: 990px) {
+  .dashboard header.light nav {
+    flex-direction: row !important;
+    align-items: center;
+  }
+  .dashboard header.light nav ul {
+    margin-left: auto;
+    display: flex;
+    margin-top: 0;
+  }
 }
