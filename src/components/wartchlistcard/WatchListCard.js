@@ -10,7 +10,6 @@ import placeHolderImg from '../images/placeholder.svg';
 import './watchlistcard.css';
 
 const WatchListCard = ({ media }) => {
-  console.log(media);
   const setImg =
     media.poster_path !== ' '
       ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`

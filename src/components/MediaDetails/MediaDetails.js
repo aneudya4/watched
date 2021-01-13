@@ -53,7 +53,6 @@ const MediaDetails = ({ match }) => {
 
   useEffect(() => {
     const fetchSimilarMedia = async () => {
-      console.log('mmg AQUI');
       try {
         const results = await fetch(
           `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
