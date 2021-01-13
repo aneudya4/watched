@@ -55,7 +55,7 @@ User will see a list of movies added by themselves to the watchlist
 
 ### Search
 
-User will see a list of movies that match his search terms
+User will see a list of movies that match the search terms
 
 <p align="center"><img  src="./readme_assets/search.gif" width="70%"></p>
 
