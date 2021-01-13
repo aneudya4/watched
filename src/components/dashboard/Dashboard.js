@@ -52,7 +52,6 @@ const DashBoard = ({ match, history }) => {
   }, []);
 
   useEffect(() => {
-    console.log(auth.user);
     if (auth.user) {
       const fetchWatchList = async () => {
         try {
