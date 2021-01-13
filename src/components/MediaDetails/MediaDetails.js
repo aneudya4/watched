@@ -90,11 +90,12 @@ const MediaDetails = ({ match }) => {
       release_date,
       runtime: runtime === 0 ? 'Not Available' : runtime.toString(),
       status,
-      poster_path,
+      poster_path: poster_path || ' ',
       genres: genresList,
       userId: auth.user.uid,
     };
 
+    console.log(addedMedia, 'qui');
     watchListDispatch({
       type: 'ADD_MEDIA_TO_WATCHLIST',
       payload: addedMedia,
@@ -174,6 +175,7 @@ const MediaDetails = ({ match }) => {
     ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
     : placeHolderImg;
 
+  console.log(media);
   return (
     <section className="media-data">
       <div className="media-details">
@@ -208,6 +210,9 @@ const MediaDetails = ({ match }) => {
       <div className="similar-media">
         <h3>Similar Movies</h3>
         <div className="similar-media-list">
+          {similarMovies.length === 0 && (
+            <p> We could not find similar movies</p>
+          )}
           {similarMovies.map((mediaData) => (
             <MediaCard
               key={mediaData.id}

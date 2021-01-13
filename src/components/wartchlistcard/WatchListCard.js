@@ -1,20 +1,25 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import placeHolderImg from '../images/placeholder.svg';
+
 import './watchlistcard.css';
 
 const WatchListCard = ({ media }) => {
+  console.log(media);
+  const setImg =
+    media.poster_path !== ' '
+      ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
+      : placeHolderImg;
   return (
     <div className="watch-list-card">
       <Link to={`/auth/dashboard/details/${media.movieId}`}>
         <div className="watch-list-img">
-          <img
-            src={`https://image.tmdb.org/t/p/w500/${media.poster_path}`}
-            alt={media.title}
-          />
+          <img src={setImg} alt={media.title} />
         </div>
 
         <div className="watch-list-details">
