@@ -52,7 +52,8 @@ const DashBoard = ({ match, history }) => {
   }, []);
 
   useEffect(() => {
-    if (auth.isAuth) {
+    console.log(auth.user);
+    if (auth.user) {
       const fetchWatchList = async () => {
         try {
           const results = await fetch(
@@ -76,7 +77,7 @@ const DashBoard = ({ match, history }) => {
       };
       fetchWatchList();
     }
-  }, [auth.isAuth]);
+  }, [auth.user]);
 
   if (auth.isAuth === false) {
     return <Redirect to="/" />;
