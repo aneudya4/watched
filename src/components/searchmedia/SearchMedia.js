@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 /* eslint-disable implicit-arrow-linebreak */
@@ -80,7 +81,9 @@ const SearchMedia = () => {
         </form>
 
         <form className="form-dropdown">
-          <select onChange={(e) => handleOnChange(e.target.value)}>
+          <select
+            className="custom-select"
+            onChange={(e) => handleOnChange(e.target.value)}>
             {media.genres.map((genre) => (
               <option key={genre.id}>{genre.name}</option>
             ))}

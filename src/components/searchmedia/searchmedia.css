@@ -25,8 +25,14 @@
   text-align: left;
 }
 .form-dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 200px;
   padding: 8px;
+}
+select option {
+  margin: 15px;
 }
 
 @media all and (min-width: 720px) {
