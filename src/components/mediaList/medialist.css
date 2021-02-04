@@ -8,6 +8,7 @@
 }
 
 .media-options ul {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
@@ -36,5 +37,9 @@ li.selected {
     margin: 0 auto;
     justify-content: space-between;
     padding: 0 20px;
+  }
+
+  .media-options ul {
+    margin-top: 0px;
   }
 }

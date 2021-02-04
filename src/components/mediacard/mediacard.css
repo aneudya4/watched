@@ -8,11 +8,6 @@
   border-radius: 5px;
 }
 
-.media-card:hover {
-  transform: scale(1.1);
-  transition: all ease-in 0.3s;
-}
-
 .media-card a {
   color: inherit;
 }
@@ -59,4 +54,11 @@
   top: 10px;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+@media all and (min-width: 890px) {
+  .media-card:hover {
+    transform: scale(1.1);
+    transition: all ease-in 0.3s;
+  }
 }
