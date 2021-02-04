@@ -8,7 +8,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import placeHolderImg from '../images/placeholder.svg';
 
 import Spinner from '../spinner/Spinner';

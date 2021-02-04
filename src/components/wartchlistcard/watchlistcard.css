@@ -1,5 +1,6 @@
 .watch-list-card {
   margin: 20px auto 0 auto;
+  position: relative;
 }
 .watch-list-card a {
   display: flex;
@@ -19,20 +20,22 @@
 }
 .watch-list img {
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
 }
 .watch-list-details {
   padding: 0 20px;
 }
-.watch-list-details > span.icon {
-  color: gold;
-  margin-bottom: auto;
+
+span.icon {
   position: absolute;
-  top: 0;
-  right: 5%;
+  top: 20px;
+  left: 95%;
+  cursor: pointer;
   font-size: 20px;
+  color: tomato;
 }
+
 .watch-list-details > * {
   margin: 10px 0 0 0;
   font-size: 20px;
@@ -54,6 +57,11 @@
 
   .watch-list-card a:hover {
     transform: scale(1.1);
+    transition: all ease 0.2s;
+  }
+
+  span.icon:hover {
+    transform: scale(1.3);
     transition: all ease 0.2s;
   }
 }
