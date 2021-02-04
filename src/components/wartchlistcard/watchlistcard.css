@@ -10,10 +10,6 @@
   width: 450px;
   height: 300px;
 }
-.watch-list-card a:hover {
-  transform: scale(1.1);
-  transition: all ease 0.2s;
-}
 
 .watch-list-img {
   width: 50%;
@@ -54,5 +50,10 @@
 @media all and (min-width: 990px) {
   .watch-list-card {
     margin: 0;
+  }
+
+  .watch-list-card a:hover {
+    transform: scale(1.1);
+    transition: all ease 0.2s;
   }
 }
