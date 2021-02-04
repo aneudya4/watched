@@ -32,6 +32,9 @@
   padding: 8px;
   background-color: white;
   color: black;
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right #ddd;
+  background-position-x: 97%;
 }
 select option {
   margin: 15px;
