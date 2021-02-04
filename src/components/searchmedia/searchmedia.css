@@ -16,12 +16,17 @@
   width: 200px;
   padding: 10px;
   border-radius: 3px;
+  margin: 50px 0 25px 0;
 }
 
 .search-list {
   display: flex;
   flex-wrap: wrap;
   text-align: left;
+}
+.form-dropdown select {
+  width: 200px;
+  padding: 8px;
 }
 
 @media all and (min-width: 720px) {
@@ -38,5 +43,9 @@
     content: '';
     display: block;
     width: 200px;
+  }
+
+  .form-dropdown {
+    display: none;
   }
 }

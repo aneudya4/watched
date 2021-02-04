@@ -13,7 +13,10 @@ const SearchMedia = () => {
   const { dispatch } = useContext(DispatchContext);
   const media = useContext(MediaContext);
 
-  const [input, setInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const [selectedGenre, setSelectedGenre] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
 
   const getMediaGenres = (genreIds = []) =>
@@ -22,10 +25,10 @@ const SearchMedia = () => {
   const fetchSearch = async () => {
     try {
       const results = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&query=${input}&page=1&include_adult=false`,
+        `https://api.themoviedb.org/3/search/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&query=${searchTerm}&page=1&include_adult=false`,
       );
       const resultsJson = await results.json();
-      setInput('');
+      setSearchTerm('');
       dispatch({ type: 'SEARCH_MEDIA', payload: resultsJson.results });
       setIsLoading(false);
     } catch (error) {
@@ -52,23 +55,38 @@ const SearchMedia = () => {
     }
   };
 
-  const onClickGenre = (genreId) => {
+  const handleOnChange = (genre) => {
+    setIsLoading(true);
+    const genreId = media.genres.find((g) => g.name === genre);
+    fetchByGenre(genreId.id);
+  };
+
+  const handleOnClickGenre = (genreId) => {
     setIsLoading(true);
     fetchByGenre(genreId);
   };
-
   return (
     <section className="search-media">
-      <GenreList handleOnClick={onClickGenre} />
+      <GenreList handleOnClick={handleOnClickGenre} />
+
       <div className="search-section">
         <form onSubmit={onSubmit}>
           <input
             type="text"
             placeholder="Search"
-            onChange={(e) => setInput(e.target.value)}
-            value={input}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
           />
         </form>
+
+        <form className="form-dropdown">
+          <select onChange={(e) => handleOnChange(e.target.value)}>
+            {media.genres.map((genre) => (
+              <option key={genre.id}>{genre.name}</option>
+            ))}
+          </select>
+        </form>
+
         <div className="search-list">
           {isLoading ? (
             <Spinner />

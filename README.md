@@ -63,10 +63,9 @@ User will see a list of movies that match the search terms
 
 User clicks add or remove from watchlist.
 
-<p align="center"><img  src="./readme_assets/add-watchlist.gif" width="70%"></p>
+<p align="center"><img  src="./readme_assets/add-watchlist.gif{P" width="70%"></p>
 
 ### Project setup:
-
 ```bash
 git clone https://github.com/aneudya4/watched.git
 cd watched

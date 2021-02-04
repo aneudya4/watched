@@ -1,5 +1,6 @@
 aside.genre-list {
   text-align: center;
+  display: none;
 }
 
 aside h3,
@@ -24,6 +25,7 @@ aside ul li i {
 
 @media all and (min-width: 720px) {
   aside.genre-list {
+    display: block;
     width: 200px;
     padding: 85px 0;
     background: #17242c;
