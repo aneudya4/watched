@@ -17,7 +17,7 @@
   padding: 10px;
   border-radius: 3px;
   margin: 50px 0 25px 0;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .search-list {
@@ -30,11 +30,11 @@
   -moz-appearance: none;
   appearance: none;
   width: 200px;
-  padding: 8px;
+  padding: 10px 8px;
   background-color: white;
   color: black;
   background: url(https://ik.imagekit.io/aneudyimages/Arrow-down_loVLwTY-5.svg)
-    no-repeat right #ddd;
+    no-repeat right white;
   background-position: center;
   background-size: 30px;
   background-position-x: 99%;
