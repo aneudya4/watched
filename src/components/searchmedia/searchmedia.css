@@ -32,9 +32,11 @@
   padding: 8px;
   background-color: white;
   color: black;
-  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+  background: url(https://ik.imagekit.io/aneudyimages/Arrow-down_loVLwTY-5.svg)
     no-repeat right #ddd;
-  background-position-x: 97%;
+  background-position: center;
+  background-size: 40px;
+  background-position-x: 99%;
 }
 select option {
   margin: 15px;
