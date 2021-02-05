@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable function-paren-newline */
@@ -14,11 +16,13 @@ const WatchList = () => {
 
   const [input, setInput] = useState('');
 
-  const filteredList = watchList.filter((list) =>
-    list.title.toLowerCase().includes(input.toLowerCase()),
-  );
+  const filteredList =
+    watchList.length > 0
+      ? watchList.filter((list) =>
+          list.title.toLowerCase().includes(input.toLowerCase()),
+        )
+      : null;
 
-  console.log(filteredList);
   return (
     <section className="watch-list">
       <h2>WatchList</h2>
@@ -35,14 +39,16 @@ const WatchList = () => {
       ) : (
         'Nothing to show'
       )}
-      {filteredList.length === 0 && <p>Nothing to show</p>}
+      {filteredList && filteredList.length === 0 && <p>Nothing to show</p>}
       {/* add componenet with message for emtpy list here */}
 
-      <div className="watch-list-collection">
-        {filteredList.map((media) => (
-          <WatchListCard key={media.movieId} media={media} />
-        ))}
-      </div>
+      {filteredList && (
+        <div className="watch-list-collection">
+          {filteredList.map((media) => (
+            <WatchListCard key={media.movieId} media={media} />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
