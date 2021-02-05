@@ -1,14 +1,15 @@
 .watch-list-card {
-  margin: 20px auto 0 auto;
+  margin: 20px auto 150px auto;
   position: relative;
 }
 .watch-list-card a {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   position: relative;
   align-items: center;
   margin: 20px 0;
-  width: 450px;
+  /* width: 200px; */
   height: 300px;
 }
 
@@ -29,7 +30,7 @@
 
 .watch-list-card span.icon {
   position: absolute;
-  top: 20px;
+  top: 15px;
   left: 95%;
   cursor: pointer;
   font-size: 20px;
@@ -52,7 +53,7 @@
 
 @media all and (min-width: 990px) {
   .watch-list-card {
-    margin: 0;
+    margin: 100px 0;
   }
 
   .watch-list-card a:hover {
