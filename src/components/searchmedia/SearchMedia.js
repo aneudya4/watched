@@ -6,6 +6,7 @@
 /* eslint-disable import/no-unresolved */
 import React, { useContext, useState } from 'react';
 import Spinner from '../spinner/Spinner';
+import GenreListDropDown from '../genrelistdropdown/GenreListDropDown';
 import GenreList from '../genrelist/GenreList';
 import { DispatchContext, MediaContext } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
@@ -16,8 +17,6 @@ const SearchMedia = () => {
   const media = useContext(MediaContext);
 
   const [searchTerm, setSearchTerm] = useState('');
-
-  const [selectedGenre, setSelectedGenre] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -88,16 +87,7 @@ const SearchMedia = () => {
             Search
           </button>
         </form>
-
-        <form className="form-dropdown">
-          <select
-            className="custom-select"
-            onChange={(e) => handleOnChange(e.target.value)}>
-            {media.genres.map((genre) => (
-              <option key={genre.id}>{genre.name}</option>
-            ))}
-          </select>
-        </form>
+        <GenreListDropDown handleOnChange={handleOnChange} media={media} />
 
         <div className="search-list">
           {isLoading ? (
