@@ -1,6 +1,7 @@
 .media-container {
   margin-top: 100px;
   padding-top: 10px;
+  padding-bottom: 50px;
 }
 
 .media-options {
@@ -32,6 +33,9 @@ li.selected {
 }
 
 @media all and (min-width: 990px) {
+  .media-container {
+    padding-bottom: 80px;
+  }
   .media-list {
     max-width: 1400px;
     margin: 0 auto;
