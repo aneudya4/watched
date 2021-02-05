@@ -26,6 +26,9 @@
   margin: 50px 0 25px 20px;
 }
 
+.search-section form button.btn:active {
+  transform: scale(0.98);
+}
 .search-section form input {
   width: 200px;
   padding: 10px;
