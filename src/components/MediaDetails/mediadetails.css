@@ -9,15 +9,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 25px auto;
   padding: 0 20px;
   max-width: 1400px;
 }
 
 .media-details .media-img {
   position: relative;
-  width: 400px;
-  height: 600px;
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+  max-height: 600px;
   margin-bottom: 20px;
 }
 .media-details .media-img img {
@@ -74,7 +76,6 @@
 .media-summary .media-action-btns {
   margin-top: 25px;
   text-align: center;
-  /* margin-top: auto; */
 }
 .media-action-btns a {
   display: inline-block;
