@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
@@ -25,6 +26,9 @@ const SearchMedia = () => {
 
   const fetchSearch = async () => {
     try {
+      if (searchTerm.trim() === '') {
+        throw new Error('Input cant be empty');
+      }
       const results = await fetch(
         `https://api.themoviedb.org/3/search/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&query=${searchTerm}&page=1&include_adult=false`,
       );
@@ -33,7 +37,8 @@ const SearchMedia = () => {
       dispatch({ type: 'SEARCH_MEDIA', payload: resultsJson.results });
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      console.log(error.message);
     }
   };
 
@@ -66,6 +71,7 @@ const SearchMedia = () => {
     setIsLoading(true);
     fetchByGenre(genreId);
   };
+
   return (
     <section className="search-media">
       <GenreList handleOnClick={handleOnClickGenre} />

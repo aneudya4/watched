@@ -14,25 +14,32 @@ const WatchList = () => {
 
   const [input, setInput] = useState('');
 
-  const filterList = watchList.filter((list) =>
+  const filteredList = watchList.filter((list) =>
     list.title.toLowerCase().includes(input.toLowerCase()),
   );
 
+  console.log(filteredList);
   return (
     <section className="watch-list">
       <h2>WatchList</h2>
 
-      <label>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <i className="fas fa-search" />
-      </label>
+      {watchList.length > 0 ? (
+        <label>
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <i className="fas fa-search" />
+        </label>
+      ) : (
+        'Nothing to show'
+      )}
+      {filteredList.length === 0 && <p>Nothing to show</p>}
+      {/* add componenet with message for emtpy list here */}
 
       <div className="watch-list-collection">
-        {filterList.map((media) => (
+        {filteredList.map((media) => (
           <WatchListCard key={media.movieId} media={media} />
         ))}
       </div>
