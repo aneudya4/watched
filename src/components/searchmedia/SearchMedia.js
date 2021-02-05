@@ -84,6 +84,9 @@ const SearchMedia = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
           />
+          <button type="submit" className="btn">
+            Search
+          </button>
         </form>
 
         <form className="form-dropdown">

@@ -11,6 +11,20 @@
   height: 200px;
   text-align: center;
 }
+.search-section form:first-of-type {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-section form button.btn {
+  border: 0;
+  padding: 13px 25px;
+  background: white;
+  margin: 50px 0 25px 20px;
+}
 
 .search-section form input {
   width: 200px;
