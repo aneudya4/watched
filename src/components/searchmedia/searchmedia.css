@@ -24,6 +24,7 @@
   padding: 13px 25px;
   background: white;
   margin: 50px 0 25px 20px;
+  transition: 0.2s all;
 }
 
 .search-section form button.btn:active {
