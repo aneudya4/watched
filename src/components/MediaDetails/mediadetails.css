@@ -56,7 +56,7 @@
 .media-summary h4 {
   font-size: 20px;
   margin: 25px 0 10px 0;
-  color: #40525e;
+  color: #a1a1a1;
 }
 
 .media-summary p {
@@ -67,7 +67,7 @@
 .media-summary span {
   display: inline-block;
   margin: 10px 10px;
-  color: #40525e;
+  color: #a1a1a1;
 }
 
 .media-summary span:first-of-type {
