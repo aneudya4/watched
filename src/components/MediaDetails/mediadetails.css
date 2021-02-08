@@ -42,7 +42,6 @@
   flex-direction: column;
   text-align: justify;
   margin: 0 auto;
-  padding: 0 0 0 20px;
 }
 .release-info p {
   margin: 5px 0 0 0;
@@ -82,7 +81,7 @@
 }
 
 .similar-media {
-  margin-top: 30px;
+  margin-top: 130px;
   text-align: center;
   padding: 20px 0;
 }
@@ -125,5 +124,8 @@
   .media-summary .media-action-btns {
     text-align: left;
     margin-top: auto;
+  }
+  .media-summary {
+    padding: 0 0 0 20px;
   }
 }
