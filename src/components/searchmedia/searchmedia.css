@@ -1,9 +1,14 @@
 .search-media {
   color: white;
   display: flex;
-  margin-top: 150px;
+  margin-top: 110px;
   padding: 10px 0 0 0;
   flex-direction: column;
+}
+.search-media h1 {
+  color: white;
+  margin: 0 auto;
+  font-size: 40px;
 }
 
 .search-section {
@@ -23,7 +28,7 @@
   border: 0;
   padding: 13px 25px;
   background: white;
-  margin: 50px 0 25px 20px;
+  margin: 20px 0 25px 20px;
   transition: 0.2s all;
 }
 
@@ -34,7 +39,7 @@
   width: 200px;
   padding: 10px;
   border-radius: 3px;
-  margin: 50px 0 25px 0;
+  margin: 20px 0 25px 0;
   font-size: 16px;
 }
 
@@ -68,7 +73,7 @@ select option {
     display: flex;
     flex-direction: row;
     margin-left: 200px;
-    margin-top: 100px;
+    margin-top: 140px;
     padding: 10px 0 0 0;
     position: relative;
   }

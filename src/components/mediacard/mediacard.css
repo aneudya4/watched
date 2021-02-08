@@ -3,7 +3,7 @@
   width: 250px;
   height: 350px;
   padding: 20px;
-  margin: 90px auto 0 auto;
+  margin: 10px auto 0 auto;
   color: white;
   border-radius: 5px;
 }
@@ -57,6 +57,9 @@
 }
 
 @media all and (min-width: 890px) {
+  .media-card {
+    margin-top: 50px;
+  }
   .media-card:hover {
     transform: scale(1.1);
     transition: all ease-in 0.3s;

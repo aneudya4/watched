@@ -70,6 +70,7 @@ const SearchMedia = () => {
       <GenreList handleOnClick={handleOnClickGenre} />
 
       <div className="search-section">
+        <h1>Search</h1>
         <form onSubmit={onSubmit}>
           <input
             type="text"
