@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react';
 
 const GenreListDropDown = ({ handleOnChange, media }) => {

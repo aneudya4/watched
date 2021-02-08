@@ -1,9 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unused-vars */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable import/no-unresolved */
 import React, { useContext, useState } from 'react';
 import Spinner from '../spinner/Spinner';
 import GenreListDropDown from '../genrelistdropdown/GenreListDropDown';

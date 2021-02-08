@@ -1,7 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useReducer, useEffect, useState } from 'react';
-
 import AppRouter from '../routers/AppRouter';
 import {
   MediaContext,

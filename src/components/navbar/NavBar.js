@@ -1,14 +1,6 @@
-/* eslint-disable object-curly-newline */
-/* eslint-disable arrow-body-style */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-return-assign */
 import React, { useRef, useState, useContext, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthFormsContext } from '../../appContext';
-
-// eslint-disable-next-line import/no-unresolved
 import './NavBar.css';
 
 const NavBar = () => {

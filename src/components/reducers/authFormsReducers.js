@@ -1,6 +1,3 @@
-/* eslint-disable no-case-declarations */
-// eslint-disable-next-line import/prefer-default-export
-
 const initialState = {
   showLogin: false,
   showRegister: false,

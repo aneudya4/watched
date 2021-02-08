@@ -1,15 +1,4 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable import/no-cycle */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable function-paren-newline */
 import React, { useState, useContext, useEffect } from 'react';
-
 import MediaCard from '../mediacard/MediaCard';
 import { MediaContext, DispatchContext } from '../../appContext';
 import './medialist.css';

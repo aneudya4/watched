@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 const watchListReducer = (state = [], action) => {
   switch (action.type) {
     case 'GET_WATCHLIST':

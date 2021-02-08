@@ -1,10 +1,6 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import placeHolderImg from '../images/placeholder.svg';
-// eslint-disable-next-line import/no-unresolved
 import './mediacard.css';
 
 const MediaCard = ({ media, genres }) => {

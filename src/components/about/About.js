@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-// eslint-disable-next-line react/no-unescaped-entities
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './about.css';

@@ -1,14 +1,6 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable indent */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable function-paren-newline */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable react/jsx-one-expression-per-line */
 import React, { useContext, useState } from 'react';
-import { WatchListContext, DispatchContext } from '../../appContext';
+import { WatchListContext } from '../../appContext';
 import WatchListCard from '../wartchlistcard/WatchListCard';
-// eslint-disable-next-line import/no-unresolved
 import './watchlist.css';
 
 const WatchList = () => {

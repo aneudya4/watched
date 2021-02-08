@@ -1,15 +1,5 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-useless-return */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable camelcase */
-/* eslint-disable object-curly-newline */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import placeHolderImg from '../images/placeholder.svg';
-
 import Spinner from '../spinner/Spinner';
 import {
   WatchListContext,
@@ -18,7 +8,6 @@ import {
   AuthFormsContext,
 } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
-// eslint-disable-next-line import/no-unresolved
 import config from '../config';
 import './mediadetails.css';
 

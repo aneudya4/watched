@@ -1,12 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-useless-return */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable operator-linebreak */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable import/no-unresolved */
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import placeHolderImg from '../images/placeholder.svg';

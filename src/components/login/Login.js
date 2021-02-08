@@ -1,11 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable function-paren-newline */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useCallback, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import firebaseApp from '../../firebase';

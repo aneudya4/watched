@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-cycle */
-/* eslint react/prop-types: 0 */
-
 import React, { useEffect, useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import DashboardNav from '../dashboardNav/DashboardNav';
