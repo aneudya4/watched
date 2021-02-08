@@ -36,7 +36,7 @@ const Login = ({ history }) => {
         setShowError(true);
       }
     },
-    [history],
+    [history, authDispatch],
   );
 
   const handleDemoLogIn = async () => {

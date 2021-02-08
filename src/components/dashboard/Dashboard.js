@@ -28,7 +28,7 @@ const DashBoard = ({ match, history }) => {
       }
     };
     fetchMovies();
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     const fetchGeres = async () => {
       try {
@@ -45,7 +45,7 @@ const DashBoard = ({ match, history }) => {
       }
     };
     fetchGeres();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (auth.user) {
@@ -72,7 +72,7 @@ const DashBoard = ({ match, history }) => {
       };
       fetchWatchList();
     }
-  }, [auth.user]);
+  }, [auth.user, watchListDispatch]);
 
   if (auth.isAuth === false) {
     return <Redirect to="/" />;

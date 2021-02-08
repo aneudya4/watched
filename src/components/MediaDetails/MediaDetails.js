@@ -57,7 +57,7 @@ const MediaDetails = ({ match }) => {
       }
     };
     fetchSimilarMedia();
-  }, [match.params.mediaId]);
+  }, [match.params.mediaId, dispatch]);
 
   const handleAdd = () => {
     const {

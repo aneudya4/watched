@@ -28,7 +28,7 @@ const MediaList = React.memo(() => {
       }
     };
     fetchMovieDetails();
-  }, [mediaCategory]);
+  }, [mediaCategory, dispatch]);
 
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
