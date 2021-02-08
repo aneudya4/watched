@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { WatchListContext } from '../../appContext';
 import WatchListCard from '../wartchlistcard/WatchListCard';
+import NoResults from '../no-results/NoResults';
 import './watchlist.css';
 
 const WatchList = () => {
@@ -29,10 +30,11 @@ const WatchList = () => {
           <i className="fas fa-search" />
         </label>
       ) : (
-        'Nothing to show'
+        <NoResults message={'You do not have movies added in the watchlist'} />
       )}
-      {filteredList && filteredList.length === 0 && <p>Nothing to show</p>}
-      {/* add componenet with message for emtpy list here */}
+      {filteredList && filteredList.length === 0 && (
+        <NoResults message={'We could not find movies matching your input'} />
+      )}
 
       {filteredList && (
         <div className="watch-list-collection">

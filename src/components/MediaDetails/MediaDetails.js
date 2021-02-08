@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import placeHolderImg from '../images/placeholder.svg';
+import NoResults from '../no-results/NoResults';
 import Spinner from '../spinner/Spinner';
 import {
   WatchListContext,
@@ -196,10 +197,9 @@ const MediaDetails = ({ match }) => {
         <h3>Similar Movies</h3>
 
         {similarMovies.length === 0 && (
-          <p className="no-results">
-            We could not find similar movies <i className="fas fa-box-open" />
-          </p>
+          <NoResults message={'We could not find similar movies'} />
         )}
+
         <div className="similar-media-list">
           {similarMovies.map((mediaData) => (
             <MediaCard
