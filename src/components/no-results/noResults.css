@@ -1,8 +1,12 @@
 .no-results {
-  background-color: coral;
-  width: fit-content;
   margin: 25px auto 0 auto;
+}
+
+.no-results span {
+  background-color: coral;
   padding: 10px 15px;
+  display: inline-block;
+  width: 300px;
 }
 
 .no-results-img-container {

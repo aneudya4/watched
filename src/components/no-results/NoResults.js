@@ -4,10 +4,10 @@ import './noResults.css';
 
 const NoResults = ({ message }) => {
   return (
-    <section>
-      <p className="no-results">
+    <section className="no-results">
+      <span>
         {message} <i className="fas fa-box-open" />
-      </p>
+      </span>
 
       <div className="no-results-img-container">
         <img src={noResultsImg} alt="no-resutls" />
