@@ -1,15 +1,16 @@
 .watch-list-card {
-  margin: 20px auto 150px auto;
+  margin: 100px auto 150px auto;
   position: relative;
+  max-width: 460px;
 }
 .watch-list-card a {
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
   position: relative;
   align-items: center;
   margin: 20px 0;
-  /* width: 200px; */
+  min-width: 300px;
   height: 300px;
 }
 
@@ -30,8 +31,8 @@
 
 .watch-list-card span.icon {
   position: absolute;
-  top: 15px;
-  left: 95%;
+  top: -50px;
+  left: 100%;
   cursor: pointer;
   font-size: 20px;
   color: tomato;
@@ -49,6 +50,17 @@
   font-size: 14px;
   word-spacing: 5px;
   line-height: 20px;
+}
+
+@media all and (min-width: 600px) {
+  .watch-list-card a {
+    flex-direction: row;
+  }
+
+  .watch-list-card span.icon {
+    top: 15px;
+    left: 95%;
+  }
 }
 
 @media all and (min-width: 990px) {
