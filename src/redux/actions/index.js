@@ -6,28 +6,28 @@ export const fetchMediaStart = (mediaType) => {
       type: types.FETCH_MEDIA_START,
     });
 
-    if (mediaType === 'movies') {
-      // write fetch request
-      // const response =  await fetch()
-      // dispatch(fetchMovieMedia(response))
-    } else {
-      // write fetch request
-      // const response =  await fetch()
-      // dispatch(fetchTvshowsMedia(response))
+    try {
+      if (mediaType) {
+        // write fetch request
+        // const response =  await fetch(moviesURL)
+        // dispatch(fetchMedia(response))
+      } else {
+        // write fetch request
+        // const response =  await fetch(tvshowsURL)
+        // dispatch(fetchMedia(response))
+      }
+    } catch (error) {
+      dispatch({
+        type: types.FETCH_MEDIA_FAIL,
+        payload: error.message,
+      });
     }
   };
 };
 
-export const fetchMovieMedia = (media) => {
+export const fetchMedia = (media) => {
   return {
-    type: types.FETCH_MEDIA_MOVIES_SUCCESS,
-    payload: media,
-  };
-};
-
-export const fetchTvshowsMedia = (media) => {
-  return {
-    type: types.FETCH_MEDIA_TVSHOWS_SUCCESS,
+    type: types.FETCH_MEDIA_SUCCESS,
     payload: media,
   };
 };
