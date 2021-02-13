@@ -90,6 +90,7 @@ const DashBoard = ({ match, history }) => {
 
         <Route
           exact
+  
           path={`${match.path}details/:mediaId`}
           component={MediaDetails}
         />

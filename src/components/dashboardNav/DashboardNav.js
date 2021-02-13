@@ -25,7 +25,7 @@ const DashboardNav = () => {
               Search
             </NavLink>
           </li>
-          <li>
+          <li> 
             <NavLink activeClassName="selected" to="/auth/dashboard/media">
               Dashboard
             </NavLink>
@@ -35,7 +35,6 @@ const DashboardNav = () => {
               Watch list
             </NavLink>
           </li>
-
           <li onClick={handleLogout}>Log Out</li>
         </ul>
       </nav>

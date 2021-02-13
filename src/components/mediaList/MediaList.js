@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+
 import MediaCard from '../mediacard/MediaCard';
 import { MediaContext, DispatchContext } from '../../appContext';
 import './medialist.css';
@@ -33,6 +34,7 @@ const MediaList = React.memo(() => {
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
   };
+
   return (
     <section className="media-container">
       <div className="media-options">
