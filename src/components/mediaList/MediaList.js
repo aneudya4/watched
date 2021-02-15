@@ -1,21 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import MediaCard from '../mediacard/MediaCard';
 import { initFetch, fetchMoviesByCategory } from '../../redux/actions/';
-import { MediaContext } from '../../appContext';
 import './medialist.css';
 
 const MediaList = React.memo(() => {
-  const media = useContext(MediaContext);
-
   const [mediaCategory, setMediaCategory] = useState('popular');
 
   const dispatch = useDispatch();
   const { movies, loading } = useSelector((state) => state);
 
   const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => media.genres.find((p) => p.id === c));
+    genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   useEffect(() => {
     dispatch(initFetch());
@@ -26,7 +23,10 @@ const MediaList = React.memo(() => {
     dispatch(await fetchMoviesByCategory(category));
   };
 
-  console.log(movies.category);
+  if (loading.isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <section className="media-container">
       <div className="media-options">

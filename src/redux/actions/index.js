@@ -13,10 +13,9 @@ export const initFetch = () => {
       await dispatch(await fetchMoviesByCategory('top_rated'));
       await dispatch(await fetchMoviesByCategory('popular'));
       await dispatch(await fetchMoviesGenres());
-
       await dispatch(await fetchTvShowsByCategory('popular'));
       await dispatch(await fetchTvShowsByCategory('top_rated'));
-
+      fetchMoviesByGenres(28);
       await dispatch(clearErrorMsg());
       await dispatch(removeLoading());
     } catch (error) {
@@ -75,6 +74,53 @@ export const fetchMoviesGenres = async () => {
   return {
     type: moviesTypes.FETCH_MOVIES_GENRES,
     payload: response.data.genres,
+  };
+};
+
+export const fetchMoviesByGenres = (genreId) => {
+  return async (dispatch) => {
+    dispatch(setLoading());
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}`,
+      );
+
+      dispatch({
+        type: moviesTypes.FETCH_MOVIES_BY_SEARCH,
+        payload: response.data.results,
+      });
+      dispatch(removeLoading());
+    } catch (error) {
+      dispatch(removeLoading());
+
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const fetchMovieBySearchTerm = (searchTerm) => {
+  return async (dispatch) => {
+    dispatch(setLoading());
+
+    try {
+      if (searchTerm.trim() === '') {
+        throw new Error('Input cant be empty');
+      }
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&query=${searchTerm}&page=1&include_adult=false`,
+      );
+      dispatch({
+        type: moviesTypes.FETCH_MOVIES_BY_SEARCH,
+        payload: response.data.results,
+      });
+      dispatch(removeLoading());
+    } catch (error) {
+      dispatch(removeLoading());
+      console.log(error.message);
+    }
   };
 };
 

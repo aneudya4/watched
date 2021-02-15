@@ -6,6 +6,7 @@ const initialState = {
   top_rated: [],
   now_playing: [],
   genres: [],
+  searched: [],
   category: 'popular',
 };
 
@@ -47,6 +48,13 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+
+    case moviesTypes.FETCH_MOVIES_BY_SEARCH:
+      return {
+        ...state,
+        searched: action.payload,
+        category: 'searched',
       };
 
     default:
