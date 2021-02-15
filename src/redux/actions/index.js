@@ -10,29 +10,14 @@ export const initFetch = () => {
   return async (dispatch) => {
     try {
       await dispatch(setLoading());
-      const popularMovies = await fetchMoviesByCategory('popular');
-      const topRatedMovies = await fetchMoviesByCategory('top_rated');
-      const popularTvShows = await fetchTvShowsByCategory('popular');
-      const topRatedTvShows = await fetchTvShowsByCategory('top_rated');
+      await dispatch(await fetchMoviesByCategory('top_rated'));
+      await dispatch(await fetchMoviesByCategory('popular'));
+      await dispatch(await fetchMoviesGenres());
 
-      await dispatch({
-        type: moviesTypes.FETCH_POPULAR_MOVIES,
-        payload: popularMovies,
-      });
-      await dispatch({
-        type: moviesTypes.FETCH_TOP_RATED_MOVIES,
-        payload: topRatedMovies,
-      });
+      await dispatch(await fetchTvShowsByCategory('popular'));
+      await dispatch(await fetchTvShowsByCategory('top_rated'));
 
-      await dispatch({
-        type: tvshowTypes.FETCH_TVSHOWS_POPULAR,
-        payload: popularTvShows,
-      });
-      await dispatch({
-        type: tvshowTypes.FETCH_TOP_RATED_TVSHOWS,
-        payload: topRatedTvShows,
-      });
-
+      await dispatch(clearErrorMsg());
       await dispatch(removeLoading());
     } catch (error) {
       dispatch(removeLoading());
@@ -71,7 +56,7 @@ export const fetchMoviesByCategory = async (category) => {
     `https://api.themoviedb.org/3/movie/${category}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
   );
 
-  return await response.data.results;
+  return setMoviesCategory(category, response.data.results);
 };
 
 export const fetchTvShowsByCategory = async (category) => {
@@ -79,5 +64,64 @@ export const fetchTvShowsByCategory = async (category) => {
     `https://api.themoviedb.org/3/tv/${category}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
   );
 
-  return await response.data.results;
+  return setTvShowsCategory(category, response.data.results);
+};
+
+export const fetchMoviesGenres = async () => {
+  const response = await axios.get(
+    'https://api.themoviedb.org/3/genre/movie/list?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US',
+  );
+
+  return {
+    type: moviesTypes.FETCH_MOVIES_GENRES,
+    payload: response.data.genres,
+  };
+};
+
+export const setMoviesCategory = (category, data) => {
+  if (category === 'popular') {
+    return {
+      type: moviesTypes.FETCH_POPULAR_MOVIES,
+      payload: data,
+    };
+  } else if (category === 'top_rated') {
+    return {
+      type: moviesTypes.FETCH_TOP_RATED_MOVIES,
+      payload: data,
+    };
+  } else if (category === 'now_playing') {
+    return {
+      type: moviesTypes.FETCH_MOVIE_IN_THEATERS,
+      payload: data,
+    };
+  } else {
+    return {
+      type: moviesTypes.FETCH_MOVIES_UPCOMING,
+      payload: data,
+    };
+  }
+};
+
+export const setTvShowsCategory = (category, data) => {
+  if (category === 'popular') {
+    return {
+      type: tvshowTypes.FETCH_TVSHOWS_POPULAR,
+      payload: data,
+    };
+  } else if (category === 'top_rated') {
+    return {
+      type: tvshowTypes.FETCH_TOP_RATED_TVSHOWS,
+      payload: data,
+    };
+  } else if (category === 'airing_today') {
+    return {
+      type: tvshowTypes.FETCH_TVSHOWS_AIRTODAY,
+      payload: data,
+    };
+  } else {
+    return {
+      type: tvshowTypes.FETCH_TVSHOWS_ON_AIR,
+      payload: data,
+    };
+  }
 };

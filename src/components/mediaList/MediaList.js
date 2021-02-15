@@ -1,46 +1,32 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Spinner from '../spinner/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import MediaCard from '../mediacard/MediaCard';
-import { initFetch } from '../../redux/actions/';
-import { MediaContext, DispatchContext } from '../../appContext';
+import { initFetch, fetchMoviesByCategory } from '../../redux/actions/';
+import { MediaContext } from '../../appContext';
 import './medialist.css';
 
 const MediaList = React.memo(() => {
   const media = useContext(MediaContext);
-  const { dispatch } = useContext(DispatchContext);
 
   const [mediaCategory, setMediaCategory] = useState('popular');
 
-  const dispatched = useDispatch();
-  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { movies, loading } = useSelector((state) => state);
 
   const getMediaGenres = (genreIds = []) =>
     genreIds.map((c) => media.genres.find((p) => p.id === c));
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        dispatched(initFetch());
-        const results = await fetch(
-          `https://api.themoviedb.org/3/movie/${mediaCategory}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-        );
-        const resultsJson = await results.json();
-        dispatch({
-          type: 'MEDIA_FETCHING',
-          payload: resultsJson.results,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovieDetails();
-  }, [mediaCategory, dispatch, dispatched]);
+    dispatch(initFetch());
+  }, [dispatch]);
 
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
+    dispatch(await fetchMoviesByCategory(category));
   };
 
-  console.log(state, 'ested');
+  console.log(movies.category);
   return (
     <section className="media-container">
       <div className="media-options">
@@ -68,7 +54,7 @@ const MediaList = React.memo(() => {
         </ul>
       </div>
       <div className="media-list">
-        {media.movies.map((mediaData) => (
+        {movies[movies.category].map((mediaData) => (
           <MediaCard
             key={mediaData.id}
             media={mediaData}

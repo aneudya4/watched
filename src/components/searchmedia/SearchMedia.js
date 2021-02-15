@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Spinner from '../spinner/Spinner';
 import GenreListDropDown from '../genrelistdropdown/GenreListDropDown';
 import GenreList from '../genrelist/GenreList';
@@ -9,7 +10,7 @@ import './searchmedia.css';
 const SearchMedia = () => {
   const { dispatch } = useContext(DispatchContext);
   const media = useContext(MediaContext);
-
+  const { movies, loading } = useSelector((state) => state);
   const [searchTerm, setSearchTerm] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -85,10 +86,10 @@ const SearchMedia = () => {
         <GenreListDropDown handleOnChange={handleOnChange} media={media} />
 
         <div className="search-list">
-          {isLoading ? (
+          {loading.isLoading ? (
             <Spinner />
           ) : (
-            media.movies.map((mediaData) => (
+            movies[movies.category].map((mediaData) => (
               <MediaCard
                 key={mediaData.id}
                 media={mediaData}

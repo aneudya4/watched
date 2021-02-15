@@ -7,45 +7,18 @@ import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
 import { DispatchContext, AuthFormsContext } from '../../appContext';
 import config from '../config';
+import { initFetch } from '../../redux/actions/';
+
+import { useDispatch } from 'react-redux';
 
 const DashBoard = ({ match, history }) => {
-  const { watchListDispatch, dispatch } = useContext(DispatchContext);
+  const { watchListDispatch } = useContext(DispatchContext);
   const { auth } = useContext(AuthFormsContext);
+  const dispatched = useDispatch();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const results = await fetch(
-          'https://api.themoviedb.org/3/movie/popular?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1',
-        );
-        const resultsJson = await results.json();
-        dispatch({
-          type: 'MEDIA_FETCHING',
-          payload: resultsJson.results,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovies();
-  }, [dispatch]);
-  useEffect(() => {
-    const fetchGeres = async () => {
-      try {
-        const results = await fetch(
-          'https://api.themoviedb.org/3/genre/movie/list?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US',
-        );
-        const resultsJson = await results.json();
-        dispatch({
-          type: 'MEDIA_GENRES',
-          payload: resultsJson.genres,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchGeres();
-  }, [dispatch]);
+    dispatched(initFetch());
+  }, [dispatched]);
 
   useEffect(() => {
     if (auth.user) {
@@ -90,7 +63,6 @@ const DashBoard = ({ match, history }) => {
 
         <Route
           exact
-  
           path={`${match.path}details/:mediaId`}
           component={MediaDetails}
         />
