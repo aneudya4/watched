@@ -5,10 +5,7 @@ const Footer = () => {
   const year = date.getFullYear();
   return (
     <footer>
-      <a
-        href="https://github.com/aneudya4/watched"
-        target="_blank"
-        rel="noreferrer">
+      <a href="https://github.com/aneudya4/" target="_blank" rel="noreferrer">
         <i className="fab fa-github"></i>
       </a>
       <a href="https://twitter.com/AneudyA4" target="_blank" rel="noreferrer">
