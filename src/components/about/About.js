@@ -12,9 +12,9 @@ const About = () => (
       <p>
         One app. Easy to use. Unlimited possibilities. Our goal is simple: BINGE
         combines the functions of a entertainment encyclopedia in combination
-        with a todo list. BINGE has an extensive library of enterteiment for you
-        to add to your list. To your surprise, our web app is for free. Register
-        in our website now and become a part of our global community!
+        with a todo list. BINGE has an extensive library of entertainment for
+        you to add to your list. To your surprise, our web app is for free.
+        Register in our website now and become a part of our global community!
       </p>
     </div>
   </section>
