@@ -1,19 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { AuthFormsContext } from '../../appContext';
-import firebaseApp from '../../firebase';
 import './dashboardnav.css';
+import { logoutUser } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const DashboardNav = () => {
-  const { authDispatch } = useContext(AuthFormsContext);
-
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    firebaseApp
-      .auth()
-      .signOut()
-      .then(() => {
-        authDispatch({ type: 'LOG_OUT_USER' });
-      });
+    dispatch(logoutUser());
   };
   return (
     <header className="light">
@@ -25,7 +19,7 @@ const DashboardNav = () => {
               Search
             </NavLink>
           </li>
-          <li> 
+          <li>
             <NavLink activeClassName="selected" to="/auth/dashboard/media">
               Dashboard
             </NavLink>

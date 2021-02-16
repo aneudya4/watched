@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import placeHolderImg from '../images/placeholder.svg';
-import { DispatchContext, AuthFormsContext } from '../../appContext';
+import { DispatchContext } from '../../appContext';
 import config from '../config';
+import { useSelector } from 'react-redux';
 
 import './watchlistcard.css';
 
 const WatchListCard = ({ media }) => {
   const { watchListDispatch } = useContext(DispatchContext);
-  const { auth } = useContext(AuthFormsContext);
+  const { auth } = useSelector((state) => state);
 
   const setImg =
     media.poster_path !== ' '

@@ -9,6 +9,7 @@ const initialState = {
   searched: [],
   similarMovies: [],
   movieCast: [],
+  movieDetails: null,
   category: 'popular',
 };
 
@@ -56,6 +57,11 @@ export const moviesReducer = (state = initialState, action) => {
       return {
         ...state,
         movieCast: action.payload,
+      };
+    case moviesTypes.FETCH_MOVIE_DETAILS:
+      return {
+        ...state,
+        movieDetails: action.payload,
       };
 
     case moviesTypes.FETCH_MOVIES_GENRES:

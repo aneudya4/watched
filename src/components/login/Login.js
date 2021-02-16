@@ -1,64 +1,50 @@
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import firebaseApp from '../../firebase';
-import { AuthFormsContext } from '../../appContext';
 import config from '../config';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loginWithEmailAndPassword,
+  showHideAuthModal,
+} from '../../redux/actions/';
 
 import './login.css';
 
 const Login = ({ history }) => {
-  const { auth, authDispatch } = useContext(AuthFormsContext);
-  const [showError, setShowError] = useState(false);
+  const { auth, errors } = useSelector((state) => state);
   const showLogin = auth.showLogin ? 'show-login' : null;
-
+  const dispatch = useDispatch();
   const handleOnClickCancel = () => {
-    authDispatch({ type: 'HIDE_LOGIN' });
+    dispatch(showHideAuthModal('login'));
   };
 
   const handleRegisterClick = () => {
-    authDispatch({ type: 'SHOW_REGISTER' });
+    dispatch(showHideAuthModal('login'));
   };
 
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
       const { email, password } = e.target.elements;
-      try {
-        await firebaseApp
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value)
-          .then((userData) =>
-            authDispatch({ type: 'LOG_IN_USER', payload: userData }),
-          );
-
-        history.push('/auth/dashboard/media');
-      } catch (error) {
-        setShowError(true);
-      }
+      dispatch(loginWithEmailAndPassword(email.value, password.value));
+      history.push('/auth/dashboard/media');
     },
-    [history, authDispatch],
+    [history, dispatch],
   );
 
-  const handleDemoLogIn = async () => {
-    try {
-      await firebaseApp
-        .auth()
-        .signInWithEmailAndPassword(
-          config.DEMO_ACCOUNT_EMAIL,
-          config.DEMO_ACCOUNT_PASSWORD,
-        )
-        .then((userData) =>
-          authDispatch({ type: 'LOG_IN_USER', payload: userData }),
-        );
-
-      history.push('/auth/dashboard/media');
-    } catch (error) {
-      setShowError(true);
-    }
+  const handleDemoLogIn = () => {
+    dispatch(
+      loginWithEmailAndPassword(
+        config.DEMO_ACCOUNT_EMAIL,
+        config.DEMO_ACCOUNT_PASSWORD,
+      ),
+    );
+    history.push('/auth/dashboard/media');
   };
   return (
     <div className={`login auth-form ${showLogin}`}>
-      {showError && <p className="error">We could not find your account</p>}
+      {errors.errorMsg && (
+        <p className="error">We could not find your account</p>
+      )}
       <h4>Log In</h4>
       <form onSubmit={handleLogin}>
         <label htmlFor="email">

@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { AuthFormsContext } from '../../appContext';
 import HomePage from '../homepage/HomePage';
-import Login from '../login/Login';
 import NavBar from '../navbar/NavBar';
-import Register from '../register/Register';
+import { useSelector } from 'react-redux';
 
 export default function HomePageRoutes() {
-  const { auth } = useContext(AuthFormsContext);
+  const { auth } = useSelector((state) => state);
   if (auth.isAuth) {
     const path = localStorage.getItem('lastPath') || '/auth/dashboard/media';
     return <Redirect to={path} />;

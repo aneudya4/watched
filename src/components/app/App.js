@@ -1,33 +1,17 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import AppRouter from '../routers/AppRouter';
-import {
-  DispatchContext,
-  WatchListContext,
-  AuthFormsContext,
-} from '../../appContext';
+import { DispatchContext, WatchListContext } from '../../appContext';
 import firebaseApp from '../../firebase';
-import fetchMediaReducer from '../reducers/fetchMediaReducer';
-import authFormsReducer from '../reducers/authFormsReducers';
 import watchListReducer from '../reducers/watchListReducer';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/actions';
 import './App.css';
 
 function App() {
   const [user, setCurrentUser] = useState(null);
-  const mediaInitialState = {
-    movies: [],
-    genres: [],
-    similarMovies: [],
-  };
-  const watchListInitialState = [];
-  const authInitialState = {
-    showLogin: false,
-    showRegister: false,
-    isAuth: null,
-    user,
-  };
+  const dispatched = useDispatch();
 
-  const [media, dispatch] = useReducer(fetchMediaReducer, mediaInitialState);
-  const [auth, authDispatch] = useReducer(authFormsReducer, authInitialState);
+  const watchListInitialState = [];
 
   const [watchList, watchListDispatch] = useReducer(
     watchListReducer,
@@ -40,20 +24,18 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      authDispatch({ type: 'LOG_IN_USER', payload: user });
+      dispatched(loginUser(user));
     }
-  }, [user]);
+  }, [user, dispatched]);
 
   return (
-    <AuthFormsContext.Provider value={{ auth, authDispatch }}>
-      <DispatchContext.Provider value={{ dispatch, watchListDispatch }}>
-        <WatchListContext.Provider value={watchList}>
-          <div className="App">
-            <AppRouter />
-          </div>
-        </WatchListContext.Provider>
-      </DispatchContext.Provider>
-    </AuthFormsContext.Provider>
+    <DispatchContext.Provider value={{ watchListDispatch }}>
+      <WatchListContext.Provider value={watchList}>
+        <div className="App">
+          <AppRouter />
+        </div>
+      </WatchListContext.Provider>
+    </DispatchContext.Provider>
   );
 }
 

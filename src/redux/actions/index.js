@@ -3,9 +3,11 @@ import {
   errorsTypes,
   moviesTypes,
   tvshowTypes,
+  authTypes,
 } from '../actions/action-types';
 import axios from 'axios';
-
+import config from '../../components/config';
+import firebaseApp from '../../firebase';
 export const initFetch = () => {
   return async (dispatch) => {
     try {
@@ -114,6 +116,28 @@ export const fetchMovieCast = (movieId) => {
   };
 };
 
+export const fetchMovieDetails = (movieId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
+      );
+
+      dispatch({
+        type: moviesTypes.FETCH_MOVIE_DETAILS,
+        payload: response.data,
+      });
+    } catch (error) {
+      dispatch(removeLoading());
+
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
 export const fetchMoviesGenres = async () => {
   const response = await axios.get(
     'https://api.themoviedb.org/3/genre/movie/list?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US',
@@ -167,7 +191,10 @@ export const fetchMovieBySearchTerm = (searchTerm) => {
       dispatch(removeLoading());
     } catch (error) {
       dispatch(removeLoading());
-      console.log(error.message);
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
     }
   };
 };
@@ -218,4 +245,88 @@ export const setTvShowsCategory = (category, data) => {
       payload: data,
     };
   }
+};
+
+export const removeFromWatchlist = (movieId) => {
+  return async (dispatch) => {
+    try {
+      // here remove from watchlist
+    } catch (error) {
+      dispatch(removeLoading());
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const loginWithEmailAndPassword = (email, password) => {
+  return async (dispatch) => {
+    try {
+      await firebaseApp
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((userData) => dispatch(loginUser(userData)));
+    } catch (error) {
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const registerUser = (name, email, password, history) => {
+  return async (dispatch) => {
+    try {
+      await firebaseApp
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+          result.user.updateProfile({
+            displayName: name,
+          });
+          dispatch({ type: 'REGISTER_USER', payload: result });
+        });
+      history.push('/auth/dashboard/media');
+    } catch (error) {
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+export const loginUser = (userData) => {
+  return { type: authTypes.LOG_IN_USER, payload: userData };
+};
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    try {
+      firebaseApp
+        .auth()
+        .signOut()
+        .then(() => {
+          dispatch({ type: authTypes.LOG_OUT_USER });
+        });
+    } catch (error) {
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const showHideAuthModal = (authForm) => {
+  if (authForm === 'login') {
+    return {
+      type: authTypes.SHOW_HIDE_LOGIN,
+    };
+  }
+  return {
+    type: authTypes.SHOW_HIDE_REGISTER,
+  };
 };

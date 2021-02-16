@@ -5,18 +5,18 @@ import MediaList from '../mediaList/MediaList';
 import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
-import { DispatchContext, AuthFormsContext } from '../../appContext';
+import { DispatchContext } from '../../appContext';
 import config from '../config';
 import Spinner from '../spinner/Spinner';
 import { useDispatch } from 'react-redux';
 import { initFetch } from '../../redux/actions/';
+import { useSelector } from 'react-redux';
 
 const DashBoard = ({ match, history }) => {
   const { watchListDispatch } = useContext(DispatchContext);
-  const { auth } = useContext(AuthFormsContext);
   const dispatch = useDispatch();
   const [verifyAuth, setVerifyAuth] = useState(true);
-
+  const { auth } = useSelector((state) => state);
   useEffect(() => {
     dispatch(initFetch());
   }, [dispatch]);
@@ -49,13 +49,13 @@ const DashBoard = ({ match, history }) => {
     }
   }, [auth.user, watchListDispatch]);
 
-  // if (verifyAuth) {
-  //   return <Spinner />;
-  // }
+  if (verifyAuth) {
+    return <Spinner />;
+  }
 
-  // if (!auth.isAuth) {
-  //   return <Redirect to="/" />;
-  // }
+  if (!auth.isAuth) {
+    return <Redirect to="/" />;
+  }
 
   // console.log(isLoading);
   localStorage.setItem('lastPath', history.location.pathname);

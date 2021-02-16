@@ -1,51 +1,41 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import placeHolderImg from '../images/placeholder.svg';
 import NoResults from '../no-results/NoResults';
 import Spinner from '../spinner/Spinner';
 import {
   WatchListContext,
   DispatchContext,
-  MediaContext,
   AuthFormsContext,
 } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
 import config from '../config';
-import { fetchSimilarMovies, fetchMovieCast } from '../../redux/actions/';
+import {
+  fetchSimilarMovies,
+  fetchMovieCast,
+  fetchMovieDetails,
+  removeFromWatchlist,
+} from '../../redux/actions/';
 import { useDispatch, useSelector } from 'react-redux';
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
-  const [media, setMedia] = useState(null);
-  const [cast, setCast] = useState(null);
   const { auth } = useContext(AuthFormsContext);
-  const { watchListDispatch, dispatch } = useContext(DispatchContext);
-  // const { similarMovies, genres: allGenres } = useContext(MediaContext);
-  const dispatched = useDispatch();
+  const dispatch = useDispatch();
   const { movies } = useSelector((state) => state);
   const watchList = useContext(WatchListContext);
+  const { watchListDispatch } = useContext(DispatchContext);
 
   const getMediaGenres = (genreIds = []) =>
     genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const results = await fetch(
-          `https://api.themoviedb.org/3/movie/${match.params.mediaId}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
-        );
-        const resultsJson = await results.json();
-        setMedia(resultsJson);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovieDetails();
+    dispatch(fetchMovieDetails(match.params.mediaId));
     window.scrollTo(0, 0);
-  }, [match.params.mediaId]);
+  }, [match.params.mediaId, dispatch]);
 
   useEffect(() => {
-    dispatched(fetchSimilarMovies(match.params.mediaId));
-  }, [match.params.mediaId, dispatched]);
+    dispatch(fetchSimilarMovies(match.params.mediaId));
+  }, [match.params.mediaId, dispatch]);
 
   const handleAdd = () => {
     const {
@@ -56,7 +46,7 @@ const MediaDetails = ({ match }) => {
       status,
       poster_path,
       genres,
-    } = media;
+    } = movies.movieDetails;
 
     const genresList = genres.map((genre) => genre.name).join(', ');
     const addedMedia = {
@@ -90,9 +80,9 @@ const MediaDetails = ({ match }) => {
   const handleremove = () => {
     watchListDispatch({
       type: 'REMOVE_MEDIA_FROM_WATCHLIST',
-      payload: media.id,
+      payload: movies.movieDetails.id,
     });
-    fetch(`${config.API_ENDPOINT}${media.id}/${auth.user.uid}`, {
+    fetch(`${config.API_ENDPOINT}${movies.movieDetails.id}/${auth.user.uid}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
@@ -104,11 +94,11 @@ const MediaDetails = ({ match }) => {
     });
   };
   useEffect(() => {
-    if (media) {
-      dispatched(fetchMovieCast(media.id));
+    if (movies.movieDetails) {
+      dispatch(fetchMovieCast(movies.movieDetails.id));
     }
-  }, [media, dispatched]);
-  if (!media) {
+  }, [movies.movieDetails, dispatch]);
+  if (!movies.movieDetails) {
     return <Spinner />;
   }
   const beautifyCastList = (castList) => {
@@ -117,7 +107,9 @@ const MediaDetails = ({ match }) => {
   };
 
   const renderButtons = () => {
-    const isAdded = watchList.find((item) => item.movieId === media.id);
+    const isAdded = watchList.find(
+      (item) => item.movieId === movies.movieDetails.id,
+    );
     if (!isAdded) {
       return (
         <button onClick={handleAdd} type="button" className="btn btn-add-wish">
@@ -134,33 +126,35 @@ const MediaDetails = ({ match }) => {
       </button>
     );
   };
-  const setImg = media.poster_path
-    ? `https://image.tmdb.org/t/p/w500/${media.poster_path}`
+  const setImg = movies.movieDetails.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${movies.movieDetails.poster_path}`
     : placeHolderImg;
 
   return (
     <section className="media-data">
       <div className="media-details">
         <div className="media-img">
-          <img src={setImg} alt={media.title} />
-          <span className="vote-avg">{media.vote_average}</span>
+          <img src={setImg} alt={movies.movieDetails.title} />
+          <span className="vote-avg">{movies.movieDetails.vote_average}</span>
         </div>
         <div className="media-summary">
-          <h3>{media.title}</h3>
+          <h3>{movies.movieDetails.title}</h3>
           <div className="genres">
-            {media.genres.map((genre) => (
+            {movies.movieDetails.genres.map((genre) => (
               <span key={genre.id}>{genre.name}</span>
             ))}
           </div>
           <div className="release-info">
-            <p className="tagline">{media.tagline}</p>
-            <p className="release-date">{media.release_date.slice(0, 4)}</p>
-            <p>{media.runtime} min</p>
+            <p className="tagline">{movies.movieDetails.tagline}</p>
+            <p className="release-date">
+              {movies.movieDetails.release_date.slice(0, 4)}
+            </p>
+            <p>{movies.movieDetails.runtime} min</p>
           </div>
 
           <div className="overview">
             <h4>Sypnosis</h4>
-            <p>{media.overview}.</p>
+            <p>{movies.movieDetails.overview}.</p>
           </div>
           <div className="cast-list">
             <h4>Cast</h4>
