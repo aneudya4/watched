@@ -12,10 +12,10 @@ export const initFetch = () => {
       await dispatch(setLoading());
       await dispatch(await fetchMoviesByCategory('top_rated'));
       await dispatch(await fetchMoviesByCategory('popular'));
-      await dispatch(await fetchMoviesGenres());
       await dispatch(await fetchTvShowsByCategory('popular'));
       await dispatch(await fetchTvShowsByCategory('top_rated'));
-      fetchMoviesByGenres(28);
+      await dispatch(await fetchMoviesGenres());
+
       await dispatch(clearErrorMsg());
       await dispatch(removeLoading());
     } catch (error) {
@@ -64,6 +64,54 @@ export const fetchTvShowsByCategory = async (category) => {
   );
 
   return setTvShowsCategory(category, response.data.results);
+};
+
+export const fetchSimilarMovies = (movieId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
+      );
+
+      dispatch({
+        type: moviesTypes.FETCH_SIMILAR_MOVIES,
+        payload: response.data.results,
+      });
+    } catch (error) {
+      dispatch(removeLoading());
+
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const fetchMovieCast = (movieId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
+      );
+
+      const filteredCastList = await response.data.cast.filter(
+        (c, i) => i <= 30,
+      );
+
+      dispatch({
+        type: moviesTypes.FETCH_MOVIES_CAST,
+        payload: filteredCastList,
+      });
+    } catch (error) {
+      dispatch(removeLoading());
+
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
 };
 
 export const fetchMoviesGenres = async () => {

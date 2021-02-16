@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import DashboardNav from '../dashboardNav/DashboardNav';
 import MediaList from '../mediaList/MediaList';
@@ -7,18 +7,19 @@ import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
 import { DispatchContext, AuthFormsContext } from '../../appContext';
 import config from '../config';
-import { initFetch } from '../../redux/actions/';
-
+import Spinner from '../spinner/Spinner';
 import { useDispatch } from 'react-redux';
+import { initFetch } from '../../redux/actions/';
 
 const DashBoard = ({ match, history }) => {
   const { watchListDispatch } = useContext(DispatchContext);
   const { auth } = useContext(AuthFormsContext);
-  const dispatched = useDispatch();
+  const dispatch = useDispatch();
+  const [verifyAuth, setVerifyAuth] = useState(true);
 
   useEffect(() => {
-    dispatched(initFetch());
-  }, [dispatched]);
+    dispatch(initFetch());
+  }, [dispatch]);
 
   useEffect(() => {
     if (auth.user) {
@@ -39,6 +40,7 @@ const DashBoard = ({ match, history }) => {
             type: 'GET_WATCHLIST',
             payload: resultsJson,
           });
+          setVerifyAuth(false);
         } catch (error) {
           console.log(error);
         }
@@ -47,10 +49,15 @@ const DashBoard = ({ match, history }) => {
     }
   }, [auth.user, watchListDispatch]);
 
-  if (auth.isAuth === false) {
-    return <Redirect to="/" />;
-  }
+  // if (verifyAuth) {
+  //   return <Spinner />;
+  // }
 
+  // if (!auth.isAuth) {
+  //   return <Redirect to="/" />;
+  // }
+
+  // console.log(isLoading);
   localStorage.setItem('lastPath', history.location.pathname);
 
   return (
@@ -66,7 +73,6 @@ const DashBoard = ({ match, history }) => {
           path={`${match.path}details/:mediaId`}
           component={MediaDetails}
         />
-
         <Redirect to="/" />
       </Switch>
     </div>

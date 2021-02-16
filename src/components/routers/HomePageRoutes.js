@@ -16,9 +16,8 @@ export default function HomePageRoutes() {
     <section className="landing">
       <NavBar />
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
         <Route path="/" component={HomePage} />
+        <Route path="*" component={HomePageRoutes} />
       </Switch>
     </section>
   );

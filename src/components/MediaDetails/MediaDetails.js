@@ -10,6 +10,8 @@ import {
 } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
 import config from '../config';
+import { fetchSimilarMovies, fetchMovieCast } from '../../redux/actions/';
+import { useDispatch, useSelector } from 'react-redux';
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
@@ -17,12 +19,13 @@ const MediaDetails = ({ match }) => {
   const [cast, setCast] = useState(null);
   const { auth } = useContext(AuthFormsContext);
   const { watchListDispatch, dispatch } = useContext(DispatchContext);
-  const { similarMovies, genres: allGenres } = useContext(MediaContext);
-
+  // const { similarMovies, genres: allGenres } = useContext(MediaContext);
+  const dispatched = useDispatch();
+  const { movies } = useSelector((state) => state);
   const watchList = useContext(WatchListContext);
 
   const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => allGenres.find((p) => p.id === c));
+    genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -41,24 +44,8 @@ const MediaDetails = ({ match }) => {
   }, [match.params.mediaId]);
 
   useEffect(() => {
-    const fetchSimilarMedia = async () => {
-      try {
-        const results = await fetch(
-          `https://api.themoviedb.org/3/movie/${match.params.mediaId}/similar?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-        );
-        const resultsJson = await results.json();
-
-        dispatch({
-          type: 'SIMILAR_MEDIA_FETCHING',
-          payload: resultsJson.results,
-        });
-      } catch (error) {
-        console.log(error, 'error');
-        // console.log(error);
-      }
-    };
-    fetchSimilarMedia();
-  }, [match.params.mediaId, dispatch]);
+    dispatched(fetchSimilarMovies(match.params.mediaId));
+  }, [match.params.mediaId, dispatched]);
 
   const handleAdd = () => {
     const {
@@ -118,20 +105,9 @@ const MediaDetails = ({ match }) => {
   };
   useEffect(() => {
     if (media) {
-      const fetchCast = async () => {
-        try {
-          const results = await fetch(
-            `https://api.themoviedb.org/3/movie/${media.id}/credits?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
-          );
-          const resultsJson = await results.json();
-          setCast(resultsJson.cast.filter((list, i) => i <= 10));
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchCast();
+      dispatched(fetchMovieCast(media.id));
     }
-  }, [media]);
+  }, [media, dispatched]);
   if (!media) {
     return <Spinner />;
   }
@@ -188,7 +164,7 @@ const MediaDetails = ({ match }) => {
           </div>
           <div className="cast-list">
             <h4>Cast</h4>
-            <p>{beautifyCastList(cast)}.</p>
+            <p>{beautifyCastList(movies.movieCast)}.</p>
           </div>
           <div className="media-action-btns">{renderButtons()}</div>
         </div>
@@ -196,12 +172,12 @@ const MediaDetails = ({ match }) => {
       <div className="similar-media">
         <h3>Similar Movies</h3>
 
-        {similarMovies.length === 0 && (
+        {movies.similarMovies.length === 0 && (
           <NoResults message={'We could not find similar movies'} />
         )}
 
         <div className="similar-media-list">
-          {similarMovies.map((mediaData) => (
+          {movies.similarMovies.map((mediaData) => (
             <MediaCard
               key={mediaData.id}
               media={mediaData}

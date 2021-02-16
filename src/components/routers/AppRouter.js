@@ -1,19 +1,17 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePageRoutes from './HomePageRoutes';
-import Spinner from '../spinner/Spinner';
-
-const Dashboard = lazy(() => import('../dashboard/Dashboard'));
+import Dashboard from '../dashboard/Dashboard';
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
-        <Switch>
-          <Route path="/auth/dashboard/" component={Dashboard} />
-          <Route exact path="/" component={HomePageRoutes} />
-        </Switch>
-      </Suspense>
+      <Switch>
+        <Route path="/auth/dashboard/" component={Dashboard} />
+        <Route exact path="/" component={HomePageRoutes} />
+        <Route path="*" component={HomePageRoutes} />
+        {/* replace this with a not-found component */}
+      </Switch>
     </BrowserRouter>
   );
 }

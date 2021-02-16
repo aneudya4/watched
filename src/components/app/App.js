@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import AppRouter from '../routers/AppRouter';
 import {
-  MediaContext,
   DispatchContext,
   WatchListContext,
   AuthFormsContext,
@@ -47,15 +46,13 @@ function App() {
 
   return (
     <AuthFormsContext.Provider value={{ auth, authDispatch }}>
-      <MediaContext.Provider value={media}>
-        <DispatchContext.Provider value={{ dispatch, watchListDispatch }}>
-          <WatchListContext.Provider value={watchList}>
-            <div className="App">
-              <AppRouter />
-            </div>
-          </WatchListContext.Provider>
-        </DispatchContext.Provider>
-      </MediaContext.Provider>
+      <DispatchContext.Provider value={{ dispatch, watchListDispatch }}>
+        <WatchListContext.Provider value={watchList}>
+          <div className="App">
+            <AppRouter />
+          </div>
+        </WatchListContext.Provider>
+      </DispatchContext.Provider>
     </AuthFormsContext.Provider>
   );
 }
