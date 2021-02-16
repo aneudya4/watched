@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import './watchlist.css';
 
 const WatchList = () => {
-  const { watchlist, loading } = useSelector((state) => state);
+  const { watchlist, loading, auth } = useSelector((state) => state);
 
   const [input, setInput] = useState('');
 
@@ -17,7 +17,7 @@ const WatchList = () => {
         )
       : null;
 
-  if (loading.isLoading) {
+  if (auth.user && loading.isLoading) {
     return <Spinner />;
   }
 

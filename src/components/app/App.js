@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AppRouter from '../routers/AppRouter';
 import firebaseApp from '../../firebase';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/actions';
+import { loginUser, initFetch } from '../../redux/actions';
 import './App.css';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(loginUser(user));
+        dispatch(initFetch());
       }
     });
   }, [dispatch]);

@@ -7,23 +7,18 @@ import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
 import Spinner from '../spinner/Spinner';
 import { useDispatch } from 'react-redux';
-import { initFetch, fetchWatchlist } from '../../redux/actions/';
 import { useSelector } from 'react-redux';
 
 const DashBoard = ({ match, history }) => {
   const dispatch = useDispatch();
   const [verifyAuth, setVerifyAuth] = useState(true);
   const { auth } = useSelector((state) => state);
-  useEffect(() => {
-    dispatch(initFetch());
-  }, [dispatch]);
 
   useEffect(() => {
-    if (auth.user) {
-      dispatch(fetchWatchlist());
+    if (auth.isAuth) {
       setVerifyAuth(false);
     }
-  }, [auth.user, dispatch]);
+  }, [auth.isAuth, dispatch]);
 
   if (verifyAuth) {
     return <Spinner />;

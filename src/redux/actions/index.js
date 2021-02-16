@@ -11,16 +11,17 @@ import firebaseApp from '../../firebase';
 
 export const initFetch = () => {
   return async (dispatch) => {
+    await dispatch(setLoading());
     try {
-      await dispatch(setLoading());
       dispatch(await fetchMoviesByCategory('top_rated'));
       dispatch(await fetchMoviesByCategory('popular'));
       dispatch(await fetchMoviesGenres());
-
-      await dispatch(clearErrorMsg());
+      await dispatch(fetchWatchlist());
       await dispatch(removeLoading());
+      await dispatch(clearErrorMsg());
     } catch (error) {
       dispatch(removeLoading());
+
       dispatch(setErrorMsg(error.message));
     }
   };
@@ -265,7 +266,6 @@ export const addToWatchlist = (movie) => {
 export const fetchWatchlist = () => {
   return async (dispatch, getState) => {
     const auth = getState().auth;
-    await dispatch(setLoading());
 
     try {
       const response = await axios.get(
@@ -282,7 +282,6 @@ export const fetchWatchlist = () => {
         type: watchListTypes.FETCH_FROM_WATCHLIST,
         payload: response.data,
       });
-      dispatch(removeLoading());
     } catch (error) {
       dispatch(removeLoading());
       dispatch({
@@ -300,6 +299,7 @@ export const loginWithEmailAndPassword = (email, password, history) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userData) => dispatch(loginUser(userData)));
+
       await history.push('/auth/dashboard/media');
     } catch (error) {
       dispatch({
@@ -322,6 +322,7 @@ export const registerUser = (name, email, password, history) => {
           });
           dispatch({ type: 'REGISTER_USER', payload: result });
         });
+
       await history.push('/auth/dashboard/media');
     } catch (error) {
       dispatch({
@@ -329,6 +330,7 @@ export const registerUser = (name, email, password, history) => {
         payload: error.message,
       });
     }
+    dispatch(removeLoading());
   };
 };
 export const loginUser = (userData) => {
