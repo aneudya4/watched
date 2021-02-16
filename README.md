@@ -81,6 +81,8 @@ open http://localhost:3000
 
 - **issue with fetching** You will need to connect to a server, here is the repo for the local server
 
+- **app is in version 2** Originally app was built using Context and useReducer, app now uses Redux for state managment
+
 <h2 align="center"><a  href="https://github.com/aneudya4/watched-server.git
 ">Local Server Repo</a></h2>
 
