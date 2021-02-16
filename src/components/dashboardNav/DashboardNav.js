@@ -12,7 +12,9 @@ const DashboardNav = () => {
   return (
     <header className="light">
       <nav>
-        <h1 className="logo">BINGE</h1>
+        <h1 className="logo">
+          <NavLink to="/">BINGE</NavLink>
+        </h1>
         <ul>
           <li>
             <NavLink activeClassName="selected" to="/auth/dashboard/search">

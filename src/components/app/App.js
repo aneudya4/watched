@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import AppRouter from '../routers/AppRouter';
 import firebaseApp from '../../firebase';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/actions';
+import { loginUser, setLoading, removeLoading } from '../../redux/actions';
 import './App.css';
 
 function App() {
@@ -11,7 +11,9 @@ function App() {
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
+        dispatch(setLoading());
         dispatch(loginUser(user));
+        dispatch(removeLoading());
       }
     });
   }, [dispatch]);

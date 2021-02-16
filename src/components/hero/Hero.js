@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Hero = () => {
   const { auth } = useSelector((state) => state);
-
   const dispatch = useDispatch();
 
   const handleClickLogin = () => {
@@ -14,10 +13,6 @@ const Hero = () => {
   const handleClickRegister = () => {
     dispatch(showHideAuthModal('register'));
   };
-
-  // const renderAuthButton = ()=>{
-  //   return
-  // }
 
   const showLoginClass = auth.showLogin ? 'selected-auth' : null;
   const showRegister = auth.showRegister ? 'selected-auth' : null;

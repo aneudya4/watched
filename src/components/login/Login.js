@@ -25,10 +25,9 @@ const Login = ({ history }) => {
     async (e) => {
       e.preventDefault();
       const { email, password } = e.target.elements;
-      dispatch(loginWithEmailAndPassword(email.value, password.value));
-      history.push('/auth/dashboard/media');
+      dispatch(loginWithEmailAndPassword(email.value, password.value, history));
     },
-    [history, dispatch],
+    [dispatch, history],
   );
 
   const handleDemoLogIn = () => {
@@ -42,8 +41,11 @@ const Login = ({ history }) => {
   };
   return (
     <div className={`login auth-form ${showLogin}`}>
-      {errors.errorMsg && (
-        <p className="error">We could not find your account</p>
+      {errors.errorMsg === 'auth/wrong-password' && (
+        <p className="error">Your password is invalid, please try again</p>
+      )}
+      {errors.errorMsg === 'auth/user-not-found' && (
+        <p className="error">That Binge account doesn't exist.</p>
       )}
       <h4>Log In</h4>
       <form onSubmit={handleLogin}>

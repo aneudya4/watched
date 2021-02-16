@@ -292,17 +292,18 @@ export const fetchWatchlist = () => {
   };
 };
 
-export const loginWithEmailAndPassword = (email, password) => {
+export const loginWithEmailAndPassword = (email, password, history) => {
   return async (dispatch) => {
     try {
       await firebaseApp
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((userData) => dispatch(loginUser(userData)));
+      await history.push('/auth/dashboard/media');
     } catch (error) {
       dispatch({
         type: errorsTypes.SET_ERROR,
-        payload: error.message,
+        payload: error.code,
       });
     }
   };
@@ -320,7 +321,7 @@ export const registerUser = (name, email, password, history) => {
           });
           dispatch({ type: 'REGISTER_USER', payload: result });
         });
-      history.push('/auth/dashboard/media');
+      await history.push('/auth/dashboard/media');
     } catch (error) {
       dispatch({
         type: errorsTypes.SET_ERROR,

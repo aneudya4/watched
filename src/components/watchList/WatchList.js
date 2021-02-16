@@ -43,8 +43,8 @@ const WatchList = () => {
 
       {filteredList && (
         <div className="watch-list-collection">
-          {filteredList.map((media) => (
-            <WatchListCard key={media.movieId} media={media} />
+          {filteredList.map((movie) => (
+            <WatchListCard key={movie.movieId} movie={movie} />
           ))}
         </div>
       )}
