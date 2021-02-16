@@ -83,6 +83,8 @@ open http://localhost:3000
 
 - **app is in version 2** Originally app was built using Context and useReducer, app now uses Redux for state managment
 
+<p align="center"><a  href="https://github.com/aneudya4/watched/tree/binge-v1">Version 1 branch </a></p>
+
 <h2 align="center"><a  href="https://github.com/aneudya4/watched-server.git
 ">Local Server Repo</a></h2>
 
