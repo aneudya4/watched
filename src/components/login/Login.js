@@ -17,7 +17,7 @@ const Login = ({ history }) => {
   };
 
   const handleRegisterClick = () => {
-    dispatch(showHideAuthModal('login'));
+    dispatch(showHideAuthModal('register'));
   };
 
   const handleLogin = useCallback(
@@ -75,7 +75,7 @@ const Login = ({ history }) => {
         </div>
       </form>
       <p>
-        Dont have an account ?{' '}
+        Dont have an account ?
         <span onClick={handleRegisterClick}>Register</span>
       </p>
     </div>
