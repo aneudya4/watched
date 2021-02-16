@@ -1,26 +1,31 @@
-import React, { useContext, useState } from 'react';
-import { WatchListContext } from '../../appContext';
+import React, { useState } from 'react';
+import Spinner from '../spinner/Spinner';
 import WatchListCard from '../wartchlistcard/WatchListCard';
 import NoResults from '../no-results/NoResults';
+import { useSelector } from 'react-redux';
 import './watchlist.css';
 
 const WatchList = () => {
-  const watchList = useContext(WatchListContext);
+  const { watchlist, loading } = useSelector((state) => state);
 
   const [input, setInput] = useState('');
 
   const filteredList =
-    watchList.length > 0
-      ? watchList.filter((list) =>
+    watchlist.length > 0
+      ? watchlist.filter((list) =>
           list.title.toLowerCase().includes(input.toLowerCase()),
         )
       : null;
+
+  if (loading.isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <section className="watch-list">
       <h2>WatchList</h2>
 
-      {watchList.length > 0 ? (
+      {watchlist.length > 0 ? (
         <label>
           <input
             type="text"

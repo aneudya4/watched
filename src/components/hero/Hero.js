@@ -4,7 +4,6 @@ import { showHideAuthModal } from '../../redux/actions/';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Hero = () => {
-  // const { auth, authDispatch } = useContext(AuthFormsContext);
   const { auth } = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -15,6 +14,10 @@ const Hero = () => {
   const handleClickRegister = () => {
     dispatch(showHideAuthModal('register'));
   };
+
+  // const renderAuthButton = ()=>{
+  //   return
+  // }
 
   const showLoginClass = auth.showLogin ? 'selected-auth' : null;
   const showRegister = auth.showRegister ? 'selected-auth' : null;
@@ -28,12 +31,16 @@ const Hero = () => {
           <span> BEST </span>
           MULTIMEDIA BROWSER
         </h2>
-        <button className={showLoginClass} onClick={handleClickLogin}>
-          Log In
-        </button>
-        <button className={showRegister} onClick={handleClickRegister}>
-          Register
-        </button>
+        {!auth.isAuth && (
+          <>
+            <button className={showLoginClass} onClick={handleClickLogin}>
+              Log In
+            </button>
+            <button className={showRegister} onClick={handleClickRegister}>
+              Register
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

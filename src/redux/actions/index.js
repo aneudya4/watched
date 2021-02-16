@@ -4,9 +4,10 @@ import {
   moviesTypes,
   tvshowTypes,
   authTypes,
+  watchListTypes,
 } from '../actions/action-types';
 import axios from 'axios';
-import config from '../../components/config';
+import config from '../../config';
 import firebaseApp from '../../firebase';
 export const initFetch = () => {
   return async (dispatch) => {
@@ -118,6 +119,8 @@ export const fetchMovieCast = (movieId) => {
 
 export const fetchMovieDetails = (movieId) => {
   return async (dispatch) => {
+    await dispatch(setLoading());
+
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${movieId}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US`,
@@ -127,9 +130,9 @@ export const fetchMovieDetails = (movieId) => {
         type: moviesTypes.FETCH_MOVIE_DETAILS,
         payload: response.data,
       });
+      dispatch(removeLoading());
     } catch (error) {
       dispatch(removeLoading());
-
       dispatch({
         type: errorsTypes.SET_ERROR,
         payload: error.message,
@@ -248,9 +251,72 @@ export const setTvShowsCategory = (category, data) => {
 };
 
 export const removeFromWatchlist = (movieId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const auth = getState().auth;
     try {
-      // here remove from watchlist
+      await axios.delete(`${config.API_ENDPOINT}${movieId}/${auth.user.uid}`, {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `Bearer ${config.API_KEY}`,
+        },
+      });
+      dispatch({
+        type: watchListTypes.REMOVE_FROM_WATCHLIST,
+        payload: movieId,
+      });
+    } catch (error) {
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const addToWatchlist = (movie) => {
+  return async (dispatch, getState) => {
+    const auth = getState().auth;
+    try {
+      await axios.post(`${config.API_ENDPOINT}${auth.user.uid}`, movie, {
+        headers: {
+          'content-type': 'application/json',
+          Authorization: `Bearer ${config.API_KEY}`,
+        },
+      });
+      dispatch({
+        type: watchListTypes.ADD_TO_WATCHLIST,
+        payload: movie,
+      });
+    } catch (error) {
+      dispatch({
+        type: errorsTypes.SET_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const fetchWatchlist = () => {
+  return async (dispatch, getState) => {
+    const auth = getState().auth;
+    await dispatch(setLoading());
+
+    try {
+      const response = await axios.get(
+        `${config.API_ENDPOINT}${auth.user.uid}`,
+        {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${config.API_KEY}`,
+          },
+        },
+      );
+      dispatch({
+        type: watchListTypes.FETCH_FROM_WATCHLIST,
+        payload: response.data,
+      });
+      dispatch(removeLoading());
     } catch (error) {
       dispatch(removeLoading());
       dispatch({

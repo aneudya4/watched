@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import placeHolderImg from '../images/placeholder.svg';
-import { DispatchContext } from '../../appContext';
-import config from '../config';
-import { useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { removeFromWatchlist } from '../../redux/actions';
 import './watchlistcard.css';
 
 const WatchListCard = ({ media }) => {
-  const { watchListDispatch } = useContext(DispatchContext);
-  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const setImg =
     media.poster_path !== ' '
@@ -17,20 +14,7 @@ const WatchListCard = ({ media }) => {
       : placeHolderImg;
 
   const onClickRemove = () => {
-    watchListDispatch({
-      type: 'REMOVE_MEDIA_FROM_WATCHLIST',
-      payload: media.movieId,
-    });
-    fetch(`${config.API_ENDPOINT}${media.movieId}/${auth.user.uid}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${config.API_KEY}`,
-      },
-    }).then((res) => {
-      if (!res.ok) return res.json().then((e) => Promise.reject(e));
-      return;
-    });
+    dispatch(removeFromWatchlist(media.movieId));
   };
   return (
     <div className="watch-list-card">

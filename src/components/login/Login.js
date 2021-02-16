@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import config from '../config';
+import config from '../../config';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginWithEmailAndPassword,

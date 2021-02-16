@@ -1,29 +1,21 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import placeHolderImg from '../images/placeholder.svg';
 import NoResults from '../no-results/NoResults';
 import Spinner from '../spinner/Spinner';
-import {
-  WatchListContext,
-  DispatchContext,
-  AuthFormsContext,
-} from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
-import config from '../config';
 import {
   fetchSimilarMovies,
   fetchMovieCast,
   fetchMovieDetails,
   removeFromWatchlist,
+  addToWatchlist,
 } from '../../redux/actions/';
 import { useDispatch, useSelector } from 'react-redux';
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
-  const { auth } = useContext(AuthFormsContext);
   const dispatch = useDispatch();
-  const { movies } = useSelector((state) => state);
-  const watchList = useContext(WatchListContext);
-  const { watchListDispatch } = useContext(DispatchContext);
+  const { movies, auth, watchlist, loading } = useSelector((state) => state);
 
   const getMediaGenres = (genreIds = []) =>
     genreIds.map((c) => movies.genres.find((p) => p.id === c));
@@ -60,45 +52,18 @@ const MediaDetails = ({ match }) => {
       userId: auth.user.uid,
     };
 
-    watchListDispatch({
-      type: 'ADD_MEDIA_TO_WATCHLIST',
-      payload: addedMedia,
-    });
-    fetch(`${config.API_ENDPOINT}${auth.user.uid}`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${config.API_KEY}`,
-      },
-      body: JSON.stringify(addedMedia),
-    }).then((res) => {
-      if (!res.ok) return res.json().then((e) => Promise.reject(e));
-      return res.json();
-    });
+    dispatch(addToWatchlist(addedMedia));
   };
 
   const handleremove = () => {
-    watchListDispatch({
-      type: 'REMOVE_MEDIA_FROM_WATCHLIST',
-      payload: movies.movieDetails.id,
-    });
-    fetch(`${config.API_ENDPOINT}${movies.movieDetails.id}/${auth.user.uid}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json',
-        Authorization: `Bearer ${config.API_KEY}`,
-      },
-    }).then((res) => {
-      if (!res.ok) return res.json().then((e) => Promise.reject(e));
-      return;
-    });
+    dispatch(removeFromWatchlist(movies.movieDetails.id));
   };
   useEffect(() => {
     if (movies.movieDetails) {
       dispatch(fetchMovieCast(movies.movieDetails.id));
     }
   }, [movies.movieDetails, dispatch]);
-  if (!movies.movieDetails) {
+  if (!movies.movieDetails || loading.isLoading) {
     return <Spinner />;
   }
   const beautifyCastList = (castList) => {
@@ -107,7 +72,7 @@ const MediaDetails = ({ match }) => {
   };
 
   const renderButtons = () => {
-    const isAdded = watchList.find(
+    const isAdded = watchlist.find(
       (item) => item.movieId === movies.movieDetails.id,
     );
     if (!isAdded) {

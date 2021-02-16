@@ -4,6 +4,8 @@ import './NavBar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { showHideAuthModal } from '../../redux/actions/';
 
+import { logoutUser } from '../../redux/actions';
+
 const NavBar = () => {
   const headerRef = useRef(null);
   const [scroll, setScroll] = useState(false);
@@ -22,6 +24,9 @@ const NavBar = () => {
     dispatch(showHideAuthModal('login'));
   };
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -42,7 +47,9 @@ const NavBar = () => {
             <NavLink to="/auth/dashboard/media">Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to="/">Log Out</NavLink>
+            <NavLink onClick={handleLogout} to="/">
+              Log Out
+            </NavLink>
           </li>
         </>
       );
