@@ -13,9 +13,9 @@ export const initFetch = () => {
   return async (dispatch) => {
     try {
       await dispatch(setLoading());
-      await dispatch(await fetchMoviesByCategory('top_rated'));
-      await dispatch(await fetchMoviesByCategory('popular'));
-      await dispatch(await fetchMoviesGenres());
+      dispatch(await fetchMoviesByCategory('top_rated'));
+      dispatch(await fetchMoviesByCategory('popular'));
+      dispatch(await fetchMoviesGenres());
 
       await dispatch(clearErrorMsg());
       await dispatch(removeLoading());
