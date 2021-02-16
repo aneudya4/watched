@@ -2,7 +2,6 @@ import {
   loadingTypes,
   errorsTypes,
   moviesTypes,
-  tvshowTypes,
   authTypes,
   watchListTypes,
 } from '../actions/action-types';
@@ -15,8 +14,6 @@ export const initFetch = () => {
       await dispatch(setLoading());
       await dispatch(await fetchMoviesByCategory('top_rated'));
       await dispatch(await fetchMoviesByCategory('popular'));
-      await dispatch(await fetchTvShowsByCategory('popular'));
-      await dispatch(await fetchTvShowsByCategory('top_rated'));
       await dispatch(await fetchMoviesGenres());
 
       await dispatch(clearErrorMsg());
@@ -59,14 +56,6 @@ export const fetchMoviesByCategory = async (category) => {
   );
 
   return setMoviesCategory(category, response.data.results);
-};
-
-export const fetchTvShowsByCategory = async (category) => {
-  const response = await axios.get(
-    `https://api.themoviedb.org/3/tv/${category}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-  );
-
-  return setTvShowsCategory(category, response.data.results);
 };
 
 export const fetchSimilarMovies = (movieId) => {
@@ -221,30 +210,6 @@ export const setMoviesCategory = (category, data) => {
   } else {
     return {
       type: moviesTypes.FETCH_MOVIES_UPCOMING,
-      payload: data,
-    };
-  }
-};
-
-export const setTvShowsCategory = (category, data) => {
-  if (category === 'popular') {
-    return {
-      type: tvshowTypes.FETCH_TVSHOWS_POPULAR,
-      payload: data,
-    };
-  } else if (category === 'top_rated') {
-    return {
-      type: tvshowTypes.FETCH_TOP_RATED_TVSHOWS,
-      payload: data,
-    };
-  } else if (category === 'airing_today') {
-    return {
-      type: tvshowTypes.FETCH_TVSHOWS_AIRTODAY,
-      payload: data,
-    };
-  } else {
-    return {
-      type: tvshowTypes.FETCH_TVSHOWS_ON_AIR,
       payload: data,
     };
   }
