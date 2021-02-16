@@ -10,6 +10,8 @@
 
 <img src="https://img.shields.io/badge/React-17.0.1-blue.svg">
 
+<img src="https://img.shields.io/badge/Redux-4.0.5-purple.svg">
+
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat">
 </p>
 
@@ -45,7 +47,7 @@ One app. Easy to use. Unlimited possibilities. My goal is simple: BINGE combines
 
 ### Binge:
 
-- Binge is a mobile responsive app that was implemented with React, Node, Express,Firebase for authentication and postgresSQL
+- Binge is a mobile responsive app that was built with React,Redux,Redux-thunk Node, Express,Firebase for authentication and postgresSQL
 
 ### Watchlist:
 
