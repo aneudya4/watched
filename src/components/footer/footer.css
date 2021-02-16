@@ -1,0 +1,21 @@
+footer {
+  background-color: white;
+  color: #0e171d;
+  text-align: center;
+  padding: 10px 0;
+}
+
+footer i {
+  color: #0e171d;
+  font-size: 30px;
+  display: inline-block;
+  margin: 0 10px 20px 0;
+}
+
+footer p.copyright {
+  margin-bottom: 5px;
+}
+
+footer p:last-of-type {
+  font-size: 12px;
+}
