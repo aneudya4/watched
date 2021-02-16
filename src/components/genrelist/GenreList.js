@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { MediaContext } from '../../appContext';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import GenreItem from '../genreitem/GenreItem';
 import './genrelist.css';
 
 const GenreList = ({ handleOnClick }) => {
-  const { genres } = useContext(MediaContext);
+  const { genres } = useSelector((state) => state.movies);
 
   return (
     <aside className="genre-list">

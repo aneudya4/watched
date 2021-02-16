@@ -1,10 +1,14 @@
-const watchListReducer = (state = [], action) => {
+import { watchListTypes } from '../actions/action-types';
+
+export const watchlistReducer = (state = [], action) => {
   switch (action.type) {
-    case 'GET_WATCHLIST':
+    case watchListTypes.FETCH_FROM_WATCHLIST:
       return action.payload;
-    case 'ADD_MEDIA_TO_WATCHLIST':
+
+    case watchListTypes.ADD_TO_WATCHLIST:
       return [...state, action.payload];
-    case 'REMOVE_MEDIA_FROM_WATCHLIST':
+
+    case watchListTypes.REMOVE_FROM_WATCHLIST:
       const filteredList = state.filter(
         (item) => item.movieId !== action.payload,
       );
@@ -14,4 +18,3 @@ const watchListReducer = (state = [], action) => {
       return state;
   }
 };
-export default watchListReducer;

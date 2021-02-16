@@ -1,24 +1,36 @@
-import React, { useContext } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { AuthFormsContext } from '../../appContext';
+import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import HomePage from '../homepage/HomePage';
-import Login from '../login/Login';
 import NavBar from '../navbar/NavBar';
-import Register from '../register/Register';
+import firebaseApp from '../../firebase';
 
+import Spinner from '../spinner/Spinner';
 export default function HomePageRoutes() {
-  const { auth } = useContext(AuthFormsContext);
-  if (auth.isAuth) {
-    const path = localStorage.getItem('lastPath') || '/auth/dashboard/media';
-    return <Redirect to={path} />;
+  const [checkAuth, setCheckAuth] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCheckAuth(false);
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+        setCheckAuth(false);
+      }
+    });
+  }, []);
+
+  if (checkAuth && !isLoggedIn) {
+    return <Spinner />;
   }
+
   return (
     <section className="landing">
       <NavBar />
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
         <Route path="/" component={HomePage} />
+        <Route path="*" component={HomePageRoutes} />
       </Switch>
     </section>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const GenreListDropDown = ({ handleOnChange, media }) => {
+const GenreListDropDown = ({ handleOnChange, genres }) => {
   return (
     <form className="form-dropdown">
       <select
         className="custom-select"
         onChange={(e) => handleOnChange(e.target.value)}>
-        {media.genres.map((genre) => (
+        {genres.map((genre) => (
           <option key={genre.id}>{genre.name}</option>
         ))}
       </select>

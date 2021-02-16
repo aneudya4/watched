@@ -1,68 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  fetchMoviesByGenres,
+  setLoading,
+  removeLoading,
+  fetchMovieBySearchTerm,
+} from '../../redux/actions';
 import Spinner from '../spinner/Spinner';
 import GenreListDropDown from '../genrelistdropdown/GenreListDropDown';
 import GenreList from '../genrelist/GenreList';
-import { DispatchContext, MediaContext } from '../../appContext';
 import MediaCard from '../mediacard/MediaCard';
+import { getMediaGenres } from '../../helpers/genres';
 import './searchmedia.css';
 
 const SearchMedia = () => {
-  const { dispatch } = useContext(DispatchContext);
-  const media = useContext(MediaContext);
+  const dispatch = useDispatch();
+
+  const { movies, loading } = useSelector((state) => state);
 
   const [searchTerm, setSearchTerm] = useState('');
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => media.genres.find((p) => p.id === c));
-
-  const fetchSearch = async () => {
-    try {
-      if (searchTerm.trim() === '') {
-        throw new Error('Input cant be empty');
-      }
-      const results = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&query=${searchTerm}&page=1&include_adult=false`,
-      );
-      const resultsJson = await results.json();
-      setSearchTerm('');
-      dispatch({ type: 'SEARCH_MEDIA', payload: resultsJson.results });
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error.message);
-    }
-  };
-
   const onSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    fetchSearch();
+    dispatch(fetchMovieBySearchTerm(searchTerm));
+    setSearchTerm('');
   };
 
-  const fetchByGenre = async (genreId) => {
-    try {
-      const results = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}`,
-      );
-      const resultsJson = await results.json();
-      dispatch({ type: 'SEARCH_MEDIA', payload: resultsJson.results });
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleOnChange = async (genreName) => {
+    dispatch(setLoading());
+    const genre = await movies.genres.find((g) => g.name === genreName);
+    dispatch(fetchMoviesByGenres(genre.id));
+    dispatch(removeLoading());
   };
 
-  const handleOnChange = (genre) => {
-    setIsLoading(true);
-    const genreId = media.genres.find((g) => g.name === genre);
-    fetchByGenre(genreId.id);
-  };
-
-  const handleOnClickGenre = (genreId) => {
-    setIsLoading(true);
-    fetchByGenre(genreId);
+  const handleOnClickGenre = async (genreId) => {
+    dispatch(fetchMoviesByGenres(genreId));
   };
 
   return (
@@ -82,17 +54,20 @@ const SearchMedia = () => {
             Search
           </button>
         </form>
-        <GenreListDropDown handleOnChange={handleOnChange} media={media} />
+        <GenreListDropDown
+          handleOnChange={handleOnChange}
+          genres={movies.genres}
+        />
 
         <div className="search-list">
-          {isLoading ? (
+          {loading.isLoading ? (
             <Spinner />
           ) : (
-            media.movies.map((mediaData) => (
+            movies[movies.category].map((mediaData) => (
               <MediaCard
                 key={mediaData.id}
                 media={mediaData}
-                genres={getMediaGenres(mediaData.genre_ids)}
+                genres={getMediaGenres(mediaData.genre_ids, movies)}
               />
             ))
           )}

@@ -1,38 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../spinner/Spinner';
 import MediaCard from '../mediacard/MediaCard';
-import { MediaContext, DispatchContext } from '../../appContext';
+import { fetchMoviesByCategory } from '../../redux/actions/';
+import { getMediaGenres } from '../../helpers/genres';
 import './medialist.css';
 
 const MediaList = React.memo(() => {
-  const media = useContext(MediaContext);
-  const { dispatch } = useContext(DispatchContext);
-
   const [mediaCategory, setMediaCategory] = useState('popular');
 
-  const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => media.genres.find((p) => p.id === c));
-
-  useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        const results = await fetch(
-          `https://api.themoviedb.org/3/movie/${mediaCategory}?api_key=d35dda56d61ee0678a341b8d5c804efc&language=en-US&page=1`,
-        );
-        const resultsJson = await results.json();
-        dispatch({
-          type: 'MEDIA_FETCHING',
-          payload: resultsJson.results,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMovieDetails();
-  }, [mediaCategory, dispatch]);
+  const dispatch = useDispatch();
+  const { movies, loading } = useSelector((state) => state);
 
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
+    dispatch(await fetchMoviesByCategory(category));
   };
+
+  if (loading.isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <section className="media-container">
       <div className="media-options">
@@ -60,11 +48,11 @@ const MediaList = React.memo(() => {
         </ul>
       </div>
       <div className="media-list">
-        {media.movies.map((mediaData) => (
+        {movies[movies.category].map((mediaData) => (
           <MediaCard
             key={mediaData.id}
             media={mediaData}
-            genres={getMediaGenres(mediaData.genre_ids)}
+            genres={getMediaGenres(mediaData.genre_ids, movies)}
           />
         ))}
       </div>

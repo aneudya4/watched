@@ -1,45 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { AuthFormsContext } from '../../appContext';
-import firebaseApp from '../../firebase';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { showHideAuthModal, registerUser } from '../../redux/actions/';
 const Register = ({ history }) => {
-  const { auth, authDispatch } = useContext(AuthFormsContext);
-  const [showError, setShowError] = useState(false);
-
+  const { auth, errors } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const showRegister = auth.showRegister ? 'show-register' : null;
 
   const handleOnClickCancel = () => {
-    authDispatch({ type: 'HIDE_REGISTER' });
+    dispatch(showHideAuthModal('register'));
   };
   const handleOnClickLogin = () => {
-    authDispatch({ type: 'SHOW_LOGIN' });
+    dispatch(showHideAuthModal('login'));
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = e.target.elements;
-    try {
-      await firebaseApp
-        .auth()
-        .createUserWithEmailAndPassword(email.value, password.value)
-        .then((result) => {
-          result.user.updateProfile({
-            displayName: name.value,
-          });
-          authDispatch({ type: 'REGISTER_USER', payload: result });
-        });
-
-      history.push('/auth/dashboard/media');
-    } catch (error) {
-      setShowError(true);
-    }
+    dispatch(registerUser(name.value, email.value, password.value, history));
   };
+
   return (
     <div className={`register auth-form  ${showRegister}`}>
       <h4>REGISTER</h4>
 
-      {showError && <p className="error">Account already exist</p>}
+      {errors.errorMsg && <p className="error">Account already exist</p>}
 
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name:</label>

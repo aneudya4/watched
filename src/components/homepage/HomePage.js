@@ -5,13 +5,15 @@ import Features from '../features/Features';
 import Login from '../login/Login';
 import Register from '../register/Register';
 
-const HomePage = ({ history }) => (
-  <>
-    <Hero />
-    <About />
-    <Features />
-    <Login />
-    <Register />
-  </>
-);
+const HomePage = () => {
+  return (
+    <>
+      <Hero />
+      <About />
+      <Features />
+      <Login />
+      <Register />
+    </>
+  );
+};
 export default HomePage;

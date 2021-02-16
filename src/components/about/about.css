@@ -9,6 +9,12 @@
   text-align: center;
 }
 
+.app-details i {
+  font-size: 40px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
 .app-details h3 {
   font-size: 30px;
   text-transform: uppercase;
@@ -35,7 +41,4 @@
 .app-details a:hover {
   background: #141f25c0;
   transition: all ease-in 0.2s;
-}
-
-@media all and (min-width: 720px) {
 }
