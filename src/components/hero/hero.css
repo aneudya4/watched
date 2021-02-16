@@ -11,12 +11,13 @@
   height: 100vh;
 }
 .app-info {
-  transform: translate(0%, -50%);
+  transform: translate(0%, -15%);
 }
 
 .app-info p {
   font-weight: bolder;
   margin-bottom: 10px;
+  padding: 0 5px;
 }
 
 .app-info h2 span {
@@ -26,7 +27,8 @@
 }
 
 .app-info h2 {
-  font-size: 40px;
+  font-size: 30px;
+  padding: 0 10px;
   word-wrap: break-word;
 }
 
@@ -59,6 +61,7 @@
 @media all and (min-width: 720px) {
   .app-info {
     width: 600px;
+    /* transform: translate(0%, -50%); */
   }
   .app-info h2 {
     font-size: 50px;
