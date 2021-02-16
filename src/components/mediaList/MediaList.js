@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Spinner from '../spinner/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../spinner/Spinner';
 import MediaCard from '../mediacard/MediaCard';
 import { fetchMoviesByCategory } from '../../redux/actions/';
+import { getMediaGenres } from '../../helpers/genres';
 import './medialist.css';
 
 const MediaList = React.memo(() => {
@@ -10,9 +11,6 @@ const MediaList = React.memo(() => {
 
   const dispatch = useDispatch();
   const { movies, loading } = useSelector((state) => state);
-
-  const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   const onMediaSelect = async (category) => {
     setMediaCategory(category);
@@ -54,7 +52,7 @@ const MediaList = React.memo(() => {
           <MediaCard
             key={mediaData.id}
             media={mediaData}
-            genres={getMediaGenres(mediaData.genre_ids)}
+            genres={getMediaGenres(mediaData.genre_ids, movies)}
           />
         ))}
       </div>

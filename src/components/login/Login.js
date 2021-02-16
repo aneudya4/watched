@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import config from '../../config';
 import { useDispatch, useSelector } from 'react-redux';
+import config from '../../config';
 import {
   loginWithEmailAndPassword,
   showHideAuthModal,
 } from '../../redux/actions/';
-
 import './login.css';
 
 const Login = ({ history }) => {

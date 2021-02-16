@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import placeHolderImg from '../images/placeholder.svg';
 import NoResults from '../no-results/NoResults';
 import Spinner from '../spinner/Spinner';
@@ -10,15 +11,12 @@ import {
   removeFromWatchlist,
   addToWatchlist,
 } from '../../redux/actions/';
-import { useDispatch, useSelector } from 'react-redux';
+import { getMediaGenres } from '../../helpers/genres';
 import './mediadetails.css';
 
 const MediaDetails = ({ match }) => {
   const dispatch = useDispatch();
   const { movies, auth, watchlist, loading } = useSelector((state) => state);
-
-  const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   useEffect(() => {
     dispatch(fetchMovieDetails(match.params.mediaId));
@@ -140,7 +138,7 @@ const MediaDetails = ({ match }) => {
             <MediaCard
               key={mediaData.id}
               media={mediaData}
-              genres={getMediaGenres(mediaData.genre_ids)}
+              genres={getMediaGenres(mediaData.genre_ids, movies)}
             />
           ))}
         </div>

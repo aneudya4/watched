@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import config from '../../config';
 import firebaseApp from '../../firebase';
+
 export const initFetch = () => {
   return async (dispatch) => {
     try {

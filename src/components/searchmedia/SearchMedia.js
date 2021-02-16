@@ -10,6 +10,7 @@ import Spinner from '../spinner/Spinner';
 import GenreListDropDown from '../genrelistdropdown/GenreListDropDown';
 import GenreList from '../genrelist/GenreList';
 import MediaCard from '../mediacard/MediaCard';
+import { getMediaGenres } from '../../helpers/genres';
 import './searchmedia.css';
 
 const SearchMedia = () => {
@@ -18,9 +19,6 @@ const SearchMedia = () => {
   const { movies, loading } = useSelector((state) => state);
 
   const [searchTerm, setSearchTerm] = useState('');
-
-  const getMediaGenres = (genreIds = []) =>
-    genreIds.map((c) => movies.genres.find((p) => p.id === c));
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +67,7 @@ const SearchMedia = () => {
               <MediaCard
                 key={mediaData.id}
                 media={mediaData}
-                genres={getMediaGenres(mediaData.genre_ids)}
+                genres={getMediaGenres(mediaData.genre_ids, movies)}
               />
             ))
           )}
