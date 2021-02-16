@@ -53,7 +53,7 @@ One app. Easy to use. Unlimited possibilities. My goal is simple: BINGE combines
 
 User will see a list of movies added by themselves to the watchlist
 
-<p align="center"><img  src="./readme_assets/add-watchlist.png" width="70%"></p>
+<p align="center"><img  src="./readme_assets/add-watchlist.gif" width="70%"></p>
 
 ### Search
 
