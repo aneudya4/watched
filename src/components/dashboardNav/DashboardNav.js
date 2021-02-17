@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './dashboardnav.css';
-import { logoutUser } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
+
+import { logoutUser } from '../../redux/actions';
+
+import './dashboardnav.css';
 
 const DashboardNav = () => {
   const dispatch = useDispatch();

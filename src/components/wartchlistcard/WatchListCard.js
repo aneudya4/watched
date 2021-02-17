@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import placeHolderImg from '../images/placeholder.svg';
 import { useDispatch } from 'react-redux';
 import { removeFromWatchlist } from '../../redux/actions';
+import placeHolderImg from '../images/placeholder.svg';
 import './watchlistcard.css';
 
 const WatchListCard = ({ movie }) => {
   const dispatch = useDispatch();
 
   const setImg =
-  movie.poster_path !== ' '
+    movie.poster_path !== ' '
       ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
       : placeHolderImg;
 

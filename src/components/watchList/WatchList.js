@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Spinner from '../spinner/Spinner';
 import WatchListCard from '../wartchlistcard/WatchListCard';
 import NoResults from '../no-results/NoResults';
-import { useSelector } from 'react-redux';
 import './watchlist.css';
 
 const WatchList = () => {

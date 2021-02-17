@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import './NavBar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { showHideAuthModal } from '../../redux/actions/';
-
-import { logoutUser } from '../../redux/actions';
+import { showHideAuthModal, logoutUser } from '../../redux/actions/';
+import './NavBar.css';
 
 const NavBar = () => {
   const headerRef = useRef(null);

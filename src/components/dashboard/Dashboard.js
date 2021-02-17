@@ -6,8 +6,7 @@ import WatchList from '../watchList/WatchList';
 import MediaDetails from '../MediaDetails/MediaDetails';
 import SearchMedia from '../searchmedia/SearchMedia';
 import Spinner from '../spinner/Spinner';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DashBoard = ({ match, history }) => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
-import './hero.css';
-import { showHideAuthModal } from '../../redux/actions/';
 import { useDispatch, useSelector } from 'react-redux';
+import { showHideAuthModal } from '../../redux/actions/';
+import './hero.css';
 
 const Hero = () => {
   const { auth } = useSelector((state) => state);
