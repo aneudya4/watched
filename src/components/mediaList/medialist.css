@@ -21,7 +21,6 @@
 
 li.selected {
   border-bottom: 1px solid rgba(247, 179, 78, 0.959);
-  font-size: 20px;
   transition: all ease-in 200ms;
 }
 
