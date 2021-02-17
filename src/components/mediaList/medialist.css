@@ -31,12 +31,19 @@ li.selected {
   padding: 0 20px;
 }
 
+.media-list::after {
+  content: '';
+  width: 350px;
+  margin-left: auto;
+  margin: 0px auto 60px auto;
+}
+
 @media all and (min-width: 990px) {
   .media-container {
     padding-bottom: 80px;
   }
   .media-list {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     justify-content: space-between;
     padding: 0 20px;

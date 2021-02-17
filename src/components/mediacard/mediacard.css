@@ -1,7 +1,9 @@
 .media-card {
   position: relative;
-  width: 250px;
-  height: 350px;
+  /* min-width: 100%; */
+  width: 100%;
+  max-width: 350px;
+  height: auto;
   padding: 20px;
   color: white;
   border-radius: 5px;
@@ -57,9 +59,6 @@
 }
 
 @media all and (min-width: 890px) {
-  /* .media-list .media-card {
-    margin-top: 50px !important;
-  } */
   .media-card:hover {
     transform: scale(1.1);
     transition: all ease-in 0.3s;

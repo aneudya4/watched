@@ -45,9 +45,18 @@
 
 .search-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   text-align: left;
 }
+
+.search-list::after {
+  content: '';
+  width: 350px;
+  margin-left: auto;
+  margin: 0px auto 60px auto;
+}
+
 .form-dropdown select {
   font-size: 16px;
   -webkit-appearance: none;
@@ -68,6 +77,10 @@ select option {
 }
 
 @media all and (min-width: 720px) {
+  .search-list {
+    flex-direction: row;
+  }
+
   .search-media {
     color: white;
     display: flex;
@@ -85,5 +98,11 @@ select option {
 
   .form-dropdown {
     display: none;
+  }
+}
+
+@media all and (min-width: 2000px) {
+  .search-list {
+    max-width: 2000px;
   }
 }
