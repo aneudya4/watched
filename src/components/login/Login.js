@@ -34,9 +34,9 @@ const Login = ({ history }) => {
       loginWithEmailAndPassword(
         config.DEMO_ACCOUNT_EMAIL,
         config.DEMO_ACCOUNT_PASSWORD,
+        history,
       ),
     );
-    history.push('/auth/dashboard/media');
   };
   return (
     <div className={`login auth-form ${showLogin}`}>
