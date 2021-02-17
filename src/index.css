@@ -4,7 +4,6 @@
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
   scroll-behavior: smooth;
-  font-display: optional;
 }
 body {
   background: #0e171d;
